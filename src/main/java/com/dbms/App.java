@@ -23,7 +23,10 @@ public class App extends Application {
 
         loadAllFonts();
 
-        scene = new Scene(loadFXML("userLoginView"), 1280, 800);
+        String homeScene = "UserAccountDataEntryView";
+        // String homeScene = "UserLoginView";
+
+        scene = new Scene(loadFXML(homeScene), 1280, 800);
 
         stage.setTitle("Barangay Business Clearance Database Management System");
         stage.setMinWidth(1024);

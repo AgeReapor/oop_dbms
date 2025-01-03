@@ -1,5 +1,5 @@
 package com.dbms.database;
 
-public class Setup {
+public class UserAccountDB {
 
 }
