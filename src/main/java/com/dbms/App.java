@@ -26,6 +26,8 @@ public class App extends Application {
         scene = new Scene(loadFXML("userLoginView"), 1280, 800);
 
         stage.setTitle("Barangay Business Clearance Database Management System");
+        stage.setMinWidth(1024);
+        stage.setMinHeight(768);
 
         Image icon = loadImage("brgy_logo.png");
         stage.getIcons().add(icon);
