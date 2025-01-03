@@ -1,0 +1,44 @@
+.root {
+	/* Colors */
+	--white: #ffffff;
+	--black: #010101;
+	--yellow: #f7fd07;
+	--none: #00000000;
+
+	--blue-10: #c3c9ff;
+	--blue-30: #475eeb;
+	--blue-50: #203adf;
+	--blue-70: #0a24c2;
+	--blue-90: #001282;
+	--blue-90: #001282;
+
+	--saffron-30: #feed3f;
+	--saffron-50: #fdc804;
+	--saffron-80: #ca8b02;
+
+	--red-10: #faa77a;
+	--red-30: #f06431;
+	--red-50: #cc0105;
+	--red-80: #8e070c;
+
+	--grey-5: #f2f2f2;
+	--grey-20: #cccccc;
+	--grey-60: #999999;
+	--grey-90: #2c2c2c;
+	--grey-95: #1a1a1a;
+
+	/* shadows */
+	--elevation-0: none;
+
+	--elevation-1: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.14))
+		drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.12))
+		drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.2));
+
+	--elevation-2: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.2))
+		drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.12))
+		drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.14));
+
+	--elevation-3: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.2))
+		drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.14))
+		drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.12));
+}

@@ -5,8 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -19,7 +21,10 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        scene = new Scene(loadFXML("userAccountDataEntryView"), 1280, 800);
+        loadAllFonts();
+
+        scene = new Scene(loadFXML("userLoginView"), 1280, 800);
+
         stage.setTitle("Barangay Business Clearance Database Management System");
 
         Image icon = loadImage("brgy_logo.png");
@@ -27,6 +32,7 @@ public class App extends Application {
 
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void setRoot(String fxml) throws IOException {
@@ -45,6 +51,26 @@ public class App extends Application {
 
     public static Image loadImage(String filename) {
         return new Image(App.class.getResourceAsStream("/com/dbms/images/" + filename));
+    }
+
+    public static String loadCSS(String filename) {
+        return App.class.getResource("/com/dbms/css/" + filename).toExternalForm();
+    }
+
+    public static void loadFont(String filename) {
+        Font.loadFont(App.class.getResourceAsStream("/com/dbms/fonts/" + filename), 12);
+    }
+
+    private void loadAllFonts() {
+        String path = "./src/main/resources/com/dbms/fonts";
+        File dir = new File(path);
+        File[] files = dir.listFiles();
+
+        for (File file : files) {
+            if (file.getName().endsWith(".ttf")) {
+                loadFont(file.getName());
+            }
+        }
     }
 
     public static void main(String[] args) {

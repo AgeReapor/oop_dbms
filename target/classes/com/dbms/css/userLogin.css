@@ -1,0 +1,32 @@
+.input-fields {
+	-fx-background-color: #f2f2f2;
+	-fx-font-family: "Abel";
+	-fx-font-weight: 300;
+	-fx-font-size: 18px;
+}
+
+.bg_img {
+	-fx-background-image: url("../images/bg_hall.png");
+	-fx-background-size: cover;
+}
+
+.bg_gradient {
+	-fx-background-color: linear-gradient(
+		to bottom right,
+		rgba(10, 36, 194, 0.2) 0%,
+		#001282 50%
+	);
+}
+
+.logo-text-top {
+	-fx-fill: #fdc804;
+	-fx-font-family: "Lusitana";
+	-fx-font-size: 18px;
+}
+
+.logo-text-bottom {
+	-fx-fill: #fdc804;
+	-fx-font-family: "Manrope";
+	-fx-font-size: 24px;
+	-fx-font-weight: bold;
+}
