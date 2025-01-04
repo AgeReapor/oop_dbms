@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="bp_mainView" prefHeight="800.0" prefWidth="1280.0" stylesheets="@css/mainView.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.MainViewController">
+   <left>
+      <VBox fx:id="vb_sidebar" alignment="TOP_CENTER" prefHeight="800.0" prefWidth="240.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="140.0" fitWidth="538.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/brgy_logo.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="logo-text-top" text="BARANGAY">
+                     <VBox.margin>
+                        <Insets bottom="-8.0" top="8.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="logo-text-bottom" text="SANTA CRUZ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="-2.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="32.0" top="20.0" />
+               </VBox.margin>
+            </VBox>
+            <Button mnemonicParsing="false" text="User Management" />
+            <Button mnemonicParsing="false" text="Business Clearace" />
+            <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Button fx:id="btn_logout" mnemonicParsing="false" text="Log Out" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="48.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets top="12.0" />
+         </padding>
+      </VBox>
+   </left>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <top>
+      <HBox fx:id="hb_navbar" alignment="CENTER_RIGHT" prefHeight="48.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Text fx:id="t_h1" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSINESS CLEARANCE DATABASE MANAGEMENT SYSTEM">
+                     <HBox.margin>
+                        <Insets top="4.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <Text fx:id="t_username" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+         </children>
+      </HBox>
+   </top>
+</BorderPane>

@@ -23,7 +23,7 @@ public class App extends Application {
 
         loadAllFonts();
 
-        String homeScene = "UserAccountDataEntryView";
+        String homeScene = "mainView";
         // String homeScene = "UserLoginView";
 
         scene = new Scene(loadFXML(homeScene), 1280, 800);
@@ -49,7 +49,7 @@ public class App extends Application {
         scene.setUserData(controller);
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
+    public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }

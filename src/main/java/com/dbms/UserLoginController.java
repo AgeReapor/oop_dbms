@@ -57,14 +57,4 @@ public class UserLoginController {
         return LoginDB.fetchUserId(username, password);
     }
 
-    @FXML
-    void initDB() {
-        try {
-            SetupDB.run();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            System.out.println("Database setup comlete.");
-        }
-    }
 }
