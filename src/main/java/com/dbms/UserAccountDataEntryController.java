@@ -13,15 +13,20 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class UserAccountDataEntryController implements Initializable {
-    private int userId;
+    private int userId = -1;
     private boolean isUpdate;
     private UserAccount userAccount;
+
+    @FXML
+    Text t_headerAdd, t_headerUpdate;
 
     @FXML
     TextField tf_lastname, tf_firstname, tf_middlename, tf_username, tf_password, tf_passwordRepeat;
@@ -35,11 +40,23 @@ public class UserAccountDataEntryController implements Initializable {
     @FXML
     HBox hb_usernameValidator, hb_passwordValidator;
 
+    @FXML
+    Button btn_add, btn_update;
+
+    // Setters for event flags
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setIsUpdate(boolean isUpdate) {
+        this.isUpdate = isUpdate;
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // event flags
         userId = 5;
-        isUpdate = false;
+        isUpdate = true;
 
         // Load User Account
         userAccount = loadUserAccount(userId);
@@ -65,6 +82,16 @@ public class UserAccountDataEntryController implements Initializable {
         NodeValidation.addRequiredValidation(tf_username, hb_usernameValidator);
         NodeValidation.addPasswordValidation(pf_password, hb_passwordValidator);
 
+        // hide add if updating
+        if (isUpdate) {
+            btn_add.setVisible(false);
+            t_headerAdd.setVisible(false);
+        }
+        // hide update if not updating
+        else {
+            btn_update.setVisible(false);
+            t_headerUpdate.setVisible(false);
+        }
     }
 
     private UserAccount loadUserAccount(int userId) {
@@ -82,9 +109,9 @@ public class UserAccountDataEntryController implements Initializable {
         return new UserAccount(-1, "", "", "", "", "");
     }
 
+    // toggle password visibility
     @FXML
     void togglePasswordVisibility() {
-        // toggle password visibility
         pf_password.setVisible(!pf_password.isVisible());
         tf_password.setVisible(!tf_password.isVisible());
     }
@@ -119,7 +146,29 @@ public class UserAccountDataEntryController implements Initializable {
         } catch (SQLException e) {
             ThrowAlert.throwAlert("Error", "Failed to add User Account", e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
 
+    @FXML
+    void updateHandler() {
+        if (!isAllValid()) {
+            ThrowAlert.throwAlert("Error", "Invalid Input", "Please fill out all required fields.",
+                    Alert.AlertType.ERROR);
+            return;
+        }
+
+        userAccount.setLastname(tf_lastname.getText());
+        userAccount.setFirstname(tf_firstname.getText());
+        userAccount.setMiddlename(tf_middlename.getText());
+        userAccount.setUsername(tf_username.getText());
+        userAccount.setPassword(tf_password.getText());
+
+        try {
+            UserAccountDB.updateUserAccount(userAccount);
+            ThrowAlert.throwAlert("Success", "User Account Updated", "User Account updated successfully.",
+                    Alert.AlertType.INFORMATION);
+        } catch (SQLException e) {
+            ThrowAlert.throwAlert("Error", "Failed to update User Account", e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     private boolean isAllValid() {

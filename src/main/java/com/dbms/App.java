@@ -44,14 +44,21 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
+    public static void setRoot(Parent root) throws IOException {
+        scene.setRoot(root);
+    }
+
     public static void setRoot(String fxml, String controller) throws IOException {
         scene.setRoot(loadFXML(fxml));
         scene.setUserData(controller);
     }
 
+    public static FXMLLoader getFXMLLoader(String fxml) throws IOException {
+        return new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+    }
+
     public static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+        return getFXMLLoader(fxml).load();
     }
 
     public static Image loadImage(String filename) {

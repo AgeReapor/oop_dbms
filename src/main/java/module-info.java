@@ -1,6 +1,6 @@
 module com.dbms {
     requires javafx.controls;
-    requires javafx.fxml;
+    requires transitive javafx.fxml;
     requires transitive javafx.graphics;
 
     requires java.sql;

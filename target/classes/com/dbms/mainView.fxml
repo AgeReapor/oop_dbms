@@ -42,11 +42,12 @@
                   <Insets bottom="32.0" top="20.0" />
                </VBox.margin>
             </VBox>
-            <Button mnemonicParsing="false" text="User Management" />
-            <Button mnemonicParsing="false" text="Business Clearace" />
+            <Button fx:id="btn_userManagement" mnemonicParsing="false" text="User Management" />
+            <Button fx:id="btn_addUserAccount" mnemonicParsing="false" text="Add User Account" />
+            <Button fx:id="btn_businessClearance" mnemonicParsing="false" text="Business Clearace" />
             <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Button fx:id="btn_logout" mnemonicParsing="false" text="Log Out" />
+                  <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#logout" text="Log Out" />
                </children>
                <VBox.margin>
                   <Insets bottom="48.0" />

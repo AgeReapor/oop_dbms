@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -45,8 +47,17 @@ public class UserLoginController {
             return;
         }
 
-        System.out.println("Found user `" + username + "`.");
         t_invalidWarning.setOpacity(0);
+        System.out.println("Found user `" + username + "`.");
+
+        FXMLLoader loader = App.getFXMLLoader("mainView");
+        Parent root = loader.load();
+
+        MainViewController mainViewController = loader.getController();
+        mainViewController.setUsername(username);
+
+        App.setRoot(root);
+
     }
 
     @FXML

@@ -66,7 +66,7 @@
 }
 
 .form Button {
-	-fx-text-fill: #fff;
+	-fx-text-fill: #999;
 	-fx-font-family: "Manrope";
 	-fx-font-size: 16px;
 	-fx-font-weight: bold;
@@ -75,13 +75,57 @@
 	-fx-border-style: solid;
 	-fx-border-color: #999999;
 	-fx-padding: 4px 20px;
-	-fx-background-color: #999999;
-	-fx-border-radius: 2px;
+	-fx-background-color: #fff;
+
+	-fx-border-radius: 7px;
+	-fx-background-radius: 7px;
 	-fx-display: flex;
 	-fx-flex-direction: row;
 	-fx-justify-content: center;
 	-fx-align-items: center;
 	-fx-gap: 8px;
+}
+
+.form Button:hover {
+	-fx-text-fill: #fff;
+	-fx-background-color: #999999;
+}
+
+.form Button:pressed {
+	-fx-text-fill: #999;
+	-fx-background-color: #99999940;
+}
+
+.form Button.btn-close {
+	-fx-text-fill: #fff;
+	-fx-border-color: #cc0105;
+	-fx-background-color: #cc010580;
+}
+
+.form Button.btn-close:hover {
+	-fx-background-color: #cc0105;
+	-fx-text-fill: #fff;
+}
+
+.form Button.btn-close:pressed {
+	-fx-background-color: #cc010540;
+	-fx-text-fill: #cc0105;
+}
+
+.form Button.btn-save {
+	-fx-text-fill: #054a29;
+	-fx-border-color: #054a29;
+	-fx-background-color: #2a913480;
+}
+
+.form Button.btn-save:hover {
+	-fx-background-color: #054a29;
+	-fx-text-fill: #fff;
+}
+
+.form Button.btn-save:pressed {
+	-fx-background-color: #2a913440;
+	-fx-text-fill: #054a29;
 }
 
 .form Button.toggle-visibility {

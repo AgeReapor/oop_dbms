@@ -51,7 +51,7 @@ public class UserAccountDB {
         conn.close();
     }
 
-    public void updateUserAccount(UserAccount userAccount) throws SQLException {
+    public static void updateUserAccount(UserAccount userAccount) throws SQLException {
         int userId = userAccount.getUserId();
         String username = userAccount.getUsername();
         String password = userAccount.getPassword();
