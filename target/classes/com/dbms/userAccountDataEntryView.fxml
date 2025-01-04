@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="bp_userAccountDataEntry" prefHeight="752.0" prefWidth="1040.0" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.UserAccountDataEntryController">
+<BorderPane fx:id="bp_userAccountDataEntry" prefHeight="752.0" prefWidth="1040.0" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
@@ -112,7 +112,7 @@
                            </children>
                         </StackPane>
                         <Button fx:id="btn_clear" mnemonicParsing="false" onAction="#clearHandler" text="Clear" />
-                        <Button fx:id="btn_close" mnemonicParsing="false" styleClass="btn-close" text="Close" />
+                        <Button fx:id="btn_close" mnemonicParsing="false" onAction="#closeHandler" styleClass="btn-close" text="Close" />
                      </children>
                      <VBox.margin>
                         <Insets top="64.0" />

@@ -6,6 +6,7 @@ import com.dbms.models.UserAccount;
 import com.dbms.utils.NodeValidation;
 import com.dbms.utils.ThrowAlert;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -21,9 +22,28 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class UserAccountDataEntryController implements Initializable {
-    private int userId = -1;
-    private boolean isUpdate;
-    private UserAccount userAccount;
+
+    private final int userId;
+    private final boolean isUpdate;
+    private final UserAccount userAccount;
+    private final MainViewController mainViewController;
+
+    public UserAccountDataEntryController(MainViewController mainViewController) {
+        System.out.println("New User Account.");
+        userId = -1;
+        isUpdate = false;
+        this.mainViewController = mainViewController;
+        userAccount = loadUserAccount(userId);
+    }
+
+    public UserAccountDataEntryController(MainViewController mainViewController, int userId) {
+        System.out.println("Update User Account.");
+        this.userId = userId;
+        isUpdate = true;
+        userAccount = loadUserAccount(userId);
+        this.mainViewController = mainViewController;
+        System.out.println("UserId: " + userId);
+    }
 
     @FXML
     Text t_headerAdd, t_headerUpdate;
@@ -43,23 +63,8 @@ public class UserAccountDataEntryController implements Initializable {
     @FXML
     Button btn_add, btn_update;
 
-    // Setters for event flags
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setIsUpdate(boolean isUpdate) {
-        this.isUpdate = isUpdate;
-    }
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        // event flags
-        userId = 5;
-        isUpdate = true;
-
-        // Load User Account
-        userAccount = loadUserAccount(userId);
 
         // Populate Fields
         tf_lastname.setText(userAccount.getLastname());
@@ -68,6 +73,8 @@ public class UserAccountDataEntryController implements Initializable {
         tf_username.setText(userAccount.getUsername());
         tf_password.setText(userAccount.getPassword());
         pf_password.setText(userAccount.getPassword());
+
+        System.out.println("Populated fields.");
 
         // Bind PasswordFields to their respective TextFields
         tf_password.textProperty().bindBidirectional(pf_password.textProperty());
@@ -168,6 +175,17 @@ public class UserAccountDataEntryController implements Initializable {
                     Alert.AlertType.INFORMATION);
         } catch (SQLException e) {
             ThrowAlert.throwAlert("Error", "Failed to update User Account", e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    void closeHandler() {
+        try {
+            if (ThrowAlert.confirmAlert("Close", "Are you sure? Any unsaved changes will be lost.", ""))
+                mainViewController.openUserAccountListView();
+        } catch (IOException e) {
+            ThrowAlert.throwAlert("Error", "Failed to open User Account List View", e.getMessage(),
+                    Alert.AlertType.ERROR);
         }
     }
 

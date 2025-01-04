@@ -9,6 +9,7 @@ import com.dbms.database.SetupDB;
 import com.dbms.utils.ThrowAlert;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
@@ -36,7 +37,7 @@ public class MainViewController implements Initializable {
         }
 
         try {
-            openUserAccountDataEntryView();
+            openUserAccountListView();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,8 +45,18 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void openUserAccountDataEntryView() throws IOException {
-        Parent view = App.loadFXML("userAccountDataEntryView");
+        FXMLLoader loader = App.getFXMLLoader("userAccountDataEntryView");
+        UserAccountDataEntryController controller = new UserAccountDataEntryController(this);
+        loader.setController(controller);
+        Parent view = loader.load();
+        bp_mainView.setCenter(view);
+    }
 
+    public void openUserAccountDataEntryView(int userId) throws IOException {
+        FXMLLoader loader = App.getFXMLLoader("userAccountDataEntryView");
+        UserAccountDataEntryController controller = new UserAccountDataEntryController(this, userId);
+        loader.setController(controller);
+        Parent view = loader.load();
         bp_mainView.setCenter(view);
     }
 
