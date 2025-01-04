@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.dbms.models.UserAccount;
+import com.dbms.utils.PopulateTable;
+
+import javafx.scene.control.TableView;
 
 public class UserAccountDB {
 
@@ -70,7 +73,7 @@ public class UserAccountDB {
         conn.close();
     }
 
-    public void deleteUserAccount(int userId) throws SQLException {
+    public static void deleteUserAccount(int userId) throws SQLException {
         // update status to 0 (deleted)
         String query = "UPDATE `" + DBConnection.getDBName()
                 + "`.`user_account` SET `status` = 0 WHERE `user_account`.`user_id` = " + userId + ";";
@@ -79,6 +82,18 @@ public class UserAccountDB {
         PreparedStatement stmt = conn.prepareStatement(query);
 
         stmt.execute();
+        conn.close();
+    }
+
+    public static void populateTable(TableView tableView) throws SQLException {
+        String query = "SELECT user_id, username, password, lastname, firstname, middlename FROM `"
+                + DBConnection.getDBName() + "`.`user_account` WHERE status = 1;";
+
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
+
+        PopulateTable.populateTable(tableView, rs);
         conn.close();
     }
 }

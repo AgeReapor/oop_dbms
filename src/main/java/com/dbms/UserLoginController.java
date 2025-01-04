@@ -1,7 +1,6 @@
 package com.dbms;
 
 import com.dbms.database.LoginDB;
-import com.dbms.database.SetupDB;
 import com.dbms.utils.ThrowAlert;
 
 import java.io.IOException;

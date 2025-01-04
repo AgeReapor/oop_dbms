@@ -62,7 +62,11 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void openUserAccountListView() throws IOException {
-        Parent view = App.loadFXML("userAccountListView");
+        // Parent view = App.loadFXML("userAccountListView");
+        FXMLLoader loader = App.getFXMLLoader("userAccountListView");
+        Parent view = loader.load();
+        UserAccountListController controller = loader.getController();
+        controller.setMainViewController(this);
         bp_mainView.setCenter(view);
     }
 

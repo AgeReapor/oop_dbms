@@ -139,7 +139,9 @@ public class UserAccountDataEntryController implements Initializable {
                     Alert.AlertType.ERROR);
             return;
         }
-
+        if (!ThrowAlert.confirmAlert("Add User Account", "Are you sure you want to add this User Account?", "")) {
+            return;
+        }
         userAccount.setLastname(tf_lastname.getText());
         userAccount.setFirstname(tf_firstname.getText());
         userAccount.setMiddlename(tf_middlename.getText());
@@ -150,7 +152,8 @@ public class UserAccountDataEntryController implements Initializable {
             UserAccountDB.addUserAccount(userAccount);
             ThrowAlert.throwAlert("Success", "User Account Added", "User Account added successfully.",
                     Alert.AlertType.INFORMATION);
-        } catch (SQLException e) {
+            mainViewController.openUserAccountListView();
+        } catch (Exception e) {
             ThrowAlert.throwAlert("Error", "Failed to add User Account", e.getMessage(), Alert.AlertType.ERROR);
         }
     }

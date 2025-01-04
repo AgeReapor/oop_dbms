@@ -96,34 +96,34 @@
 	-fx-background-color: #99999940;
 }
 
-.form Button.btn-close {
+.form .action-btn-group Button.btn-close {
 	-fx-text-fill: #fff;
 	-fx-border-color: #cc0105;
 	-fx-background-color: #cc010580;
 }
 
-.form Button.btn-close:hover {
+.form .action-btn-group Button.btn-close:hover {
 	-fx-background-color: #cc0105;
 	-fx-text-fill: #fff;
 }
 
-.form Button.btn-close:pressed {
+.form .action-btn-groupButton.btn-close:pressed {
 	-fx-background-color: #cc010540;
 	-fx-text-fill: #cc0105;
 }
 
-.form Button.btn-save {
+.form .action-btn-group Button.btn-save {
 	-fx-text-fill: #054a29;
 	-fx-border-color: #054a29;
 	-fx-background-color: #2a913480;
 }
 
-.form Button.btn-save:hover {
+.form .action-btn-group Button.btn-save:hover {
 	-fx-background-color: #054a29;
 	-fx-text-fill: #fff;
 }
 
-.form Button.btn-save:pressed {
+.form .action-btn-group Button.btn-save:pressed {
 	-fx-background-color: #2a913440;
 	-fx-text-fill: #054a29;
 }
