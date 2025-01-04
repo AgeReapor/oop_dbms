@@ -12,14 +12,19 @@ public class DBConnection {
     static private final String PASS = "NotCat24";
     static private final String DB_NAME = "oop_dbms";
 
-    public static String getDBName() {
+    // Returns a connection to the database
+    protected static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(DB_URL, USER, PASS);
+    }
+
+    // Returns the database name
+    protected static String getDBName() {
         return DB_NAME;
     }
 
-    public static ResultSet executeQuery(String query, String successMsg, String failMsg)
+    // Executes a query and returns a result set
+    protected static ResultSet executeQuery(PreparedStatement stmt, String successMsg, String failMsg)
             throws SQLException {
-        Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        PreparedStatement stmt = conn.prepareStatement(query);
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery();
@@ -31,9 +36,10 @@ public class DBConnection {
         return rs;
     }
 
-    public static boolean execute(String query, String successMsg, String failMsg) throws SQLException {
-        Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        PreparedStatement stmt = conn.prepareStatement(query);
+    // Executes a query
+    // returns true if the first result is a ResultSet object;
+    // returns false if the first result is an update count or there is no result
+    protected static boolean execute(PreparedStatement stmt, String successMsg, String failMsg) throws SQLException {
         boolean result = false;
         try {
             result = stmt.execute();

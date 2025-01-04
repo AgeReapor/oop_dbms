@@ -13,7 +13,7 @@ public class UserAccountDataEntryController {
     }
 
     @FXML
-    void createDB() {
+    void initDB() {
         try {
             SetupDB.run();
         } catch (SQLException e) {

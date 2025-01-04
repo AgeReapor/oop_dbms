@@ -4,19 +4,25 @@ public class UserAccount {
     private final int USER_ID;
     private String username;
     private String password;
-    private Person person;
+    private String lastname;
+    private String firstname;
+    private String middlename;
     private int status;
 
     // Constructor
-    public UserAccount(int userId, String username, String password, Person person) {
+    public UserAccount(int userId, String username, String password, String lastname, String firstname,
+            String middlename) {
         this.USER_ID = userId;
         this.username = username;
         this.password = password;
-        this.person = person;
+        this.lastname = lastname;
+        this.firstname = firstname;
+        this.middlename = middlename;
         this.status = 1;
     }
 
     // Getters and Setters
+
     public int getUserId() {
         return USER_ID;
     }
@@ -37,12 +43,28 @@ public class UserAccount {
         this.password = password;
     }
 
-    public Person getPerson() {
-        return person;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
     }
 
     public int getStatus() {

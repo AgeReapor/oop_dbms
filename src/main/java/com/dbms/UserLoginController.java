@@ -1,8 +1,10 @@
 package com.dbms;
 
 import com.dbms.database.LoginDB;
+import com.dbms.database.SetupDB;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -55,4 +57,14 @@ public class UserLoginController {
         return LoginDB.fetchUserId(username, password);
     }
 
+    @FXML
+    void initDB() {
+        try {
+            SetupDB.run();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("Database setup comlete.");
+        }
+    }
 }

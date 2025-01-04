@@ -1,5 +1,6 @@
 package com.dbms.database;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -13,7 +14,8 @@ public class LoginDB {
                 + password + "'";
 
         try {
-            ResultSet rs = DBConnection.executeQuery(query, "User found.", "User not found.");
+            PreparedStatement stmt = DBConnection.getConnection().prepareStatement(query);
+            ResultSet rs = DBConnection.executeQuery(stmt, "User found.", "User not found.");
             if (rs.next()) {
                 ret = rs.getInt("user_id");
             }
