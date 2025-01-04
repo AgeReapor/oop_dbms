@@ -1,25 +1,43 @@
 package com.dbms.models;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class BusinessClearanceTransaction {
     private final int TRANSACTION_ID;
     private InspectionType inspectionType;
-    private Business business;
-    private Person inspector;
+    private String owner;
+    private String ownerAddress;
+    private String businessName;
+    private String businessType;
+    private String contactNumber;
+    private PropertyType propertyType;
+    private String registrationNumber;
+    private String inspector;
     private LocalDate inspectionDate;
-    private double amount;
+    private BigDecimal amount;
+    private String officialReceiptNumber;
     private int status;
 
     // Constructor
-    public BusinessClearanceTransaction(int transactionId, InspectionType inspectionType, Business business,
-            Person inspector, LocalDate inspectionDate, double amount) {
+    public BusinessClearanceTransaction(int transactionId, InspectionType inspectionType, String owner,
+            String ownerAddress, String businessName, String businessType, String contactNumber,
+            PropertyType propertyType,
+            String registrationNumber, String inspector, LocalDate inspectionDate, BigDecimal amount,
+            String officialReceiptNumber) {
         this.TRANSACTION_ID = transactionId;
         this.inspectionType = inspectionType;
-        this.business = business;
+        this.owner = owner;
+        this.ownerAddress = ownerAddress;
+        this.businessName = businessName;
+        this.businessType = businessType;
+        this.contactNumber = contactNumber;
+        this.propertyType = propertyType;
+        this.registrationNumber = registrationNumber;
         this.inspector = inspector;
         this.inspectionDate = inspectionDate;
         this.amount = amount;
+        this.officialReceiptNumber = officialReceiptNumber;
         this.status = 1;
     }
 
@@ -36,19 +54,67 @@ public class BusinessClearanceTransaction {
         this.inspectionType = inspectionType;
     }
 
-    public Business getBusiness() {
-        return business;
+    public String getOwner() {
+        return owner;
     }
 
-    public void setBusiness(Business business) {
-        this.business = business;
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
-    public Person getInspector() {
+    public String getOwnerAddress() {
+        return ownerAddress;
+    }
+
+    public void setOwnerAddress(String ownerAddress) {
+        this.ownerAddress = ownerAddress;
+    }
+
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
+    }
+
+    public String getBusinessType() {
+        return businessType;
+    }
+
+    public void setBusinessType(String businessType) {
+        this.businessType = businessType;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public PropertyType getPropertyType() {
+        return propertyType;
+    }
+
+    public void setPropertyType(PropertyType propertyType) {
+        this.propertyType = propertyType;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
+    public String getInspector() {
         return inspector;
     }
 
-    public void setInspector(Person inspector) {
+    public void setInspector(String inspector) {
         this.inspector = inspector;
     }
 
@@ -60,12 +126,20 @@ public class BusinessClearanceTransaction {
         this.inspectionDate = inspectionDate;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getOfficialReceiptNumber() {
+        return officialReceiptNumber;
+    }
+
+    public void setOfficialReceiptNumber(String officialReceiptNumber) {
+        this.officialReceiptNumber = officialReceiptNumber;
     }
 
     public int getStatus() {
@@ -75,5 +149,4 @@ public class BusinessClearanceTransaction {
     public void setStatus(int status) {
         this.status = status;
     }
-
 }

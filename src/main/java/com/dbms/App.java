@@ -23,7 +23,10 @@ public class App extends Application {
 
         loadAllFonts();
 
-        scene = new Scene(loadFXML("userLoginView"), 1280, 800);
+        String homeScene = "mainView";
+        // String homeScene = "UserLoginView";
+
+        scene = new Scene(loadFXML(homeScene), 1280, 800);
 
         stage.setTitle("Barangay Business Clearance Database Management System");
         stage.setMinWidth(1024);
@@ -41,12 +44,12 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
-    public static void setRoot(String fxml, Object controller) throws IOException {
+    public static void setRoot(String fxml, String controller) throws IOException {
         scene.setRoot(loadFXML(fxml));
         scene.setUserData(controller);
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
+    public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }

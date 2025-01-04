@@ -3,8 +3,7 @@ package com.dbms.models;
 public enum PropertyType {
     OWNED("Owned"),
     RENTED("Rented"),
-    LESSOR("Lessor"),
-    OTHER("Other");
+    LESSOR("Lessor");
 
     public final String propertyType;
 

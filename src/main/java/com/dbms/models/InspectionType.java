@@ -2,8 +2,7 @@ package com.dbms.models;
 
 public enum InspectionType {
     NEW("New"),
-    RENEWAL("Renewal"),
-    NONE("None");
+    RENEWAL("Renewal");
 
     public final String inspectionType;
 

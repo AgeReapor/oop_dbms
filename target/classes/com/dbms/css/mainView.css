@@ -1,0 +1,86 @@
+#vb_sidebar {
+	/* -fx-background-color: #001282; */
+	-fx-background-color: linear-gradient(
+		to top right,
+		#475eeb 0%,
+		#203adf 10%,
+		#001282 50%
+	);
+}
+
+.logo-text-top {
+	-fx-fill: #fdc804;
+	-fx-font-family: "Lusitana";
+	-fx-font-size: 18px;
+}
+
+.logo-text-bottom {
+	-fx-fill: #fdc804;
+	-fx-font-family: "Manrope";
+	-fx-font-size: 24px;
+	-fx-font-weight: bold;
+}
+
+#vb_sidebar Button {
+	-fx-background-color: transparent;
+	-fx-cursor: hand;
+	-fx-min-width: 240px;
+	-fx-min-height: 52px;
+	-fx-font-family: "Abel";
+	-fx-font-size: 20px;
+	-fx-font-weight: 400;
+	-fx-text-fill: #feed3f;
+	-fx-background-radius: 0px;
+}
+
+#vb_sidebar Button:hover {
+	-fx-background-color: linear-gradient(
+		to bottom right,
+		#0a23c220 80%,
+		#0a24c2 100%
+	);
+}
+
+#vb_sidebar Button:pressed {
+	-fx-background-color: linear-gradient(
+		to bottom right,
+		#0a23c220 0%,
+		#0a24c2 80%
+	);
+	-fx-font-weight: 500;
+	-fx-padding: 0 0 0 20px;
+}
+
+#hb_navbar {
+	-fx-background-color: #001282;
+	-fx-border-width: 0 2px 0 0;
+	-fx-padding: 0 48px 0 12px;
+}
+
+#t_h1 {
+	-fx-fill: #feed3f;
+	-fx-font-family: "Abel";
+	-fx-font-size: 16px;
+}
+
+#t_username {
+	-fx-fill: #fdc804;
+	-fx-font-size: 18px;
+}
+
+#btn_logout {
+	-fx-font-size: 18px;
+	-fx-text-fill: #faa77a;
+}
+
+#btn_logout:hover {
+	-fx-background-color: #f2f2f2c0;
+	-fx-text-fill: #8e070c;
+	-fx-font-weight: 600;
+}
+
+#btn_logout:pressed {
+	-fx-text-fill: #faa77a;
+	-fx-background-color: #f2f2f220;
+	-fx-padding: 0;
+}

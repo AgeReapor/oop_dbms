@@ -1,6 +1,10 @@
 package com.dbms;
 
+import com.dbms.database.LoginDB;
+import com.dbms.database.SetupDB;
+
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,14 +36,14 @@ public class UserLoginController {
         System.out.println("Username: " + username);
         System.out.println("Password: " + password);
 
-        boolean valid = validate(username, password);
-        if (valid) {
+        int userId = fetchUserId(username, password);
+
+        if (userId == -1) {
             t_invalidWarning.setOpacity(1);
+            return;
         }
 
-        if (!valid) {
-            t_invalidWarning.setOpacity(0);
-        }
+        t_invalidWarning.setOpacity(0);
     }
 
     @FXML
@@ -48,8 +52,9 @@ public class UserLoginController {
         pf_password.clear();
     }
 
-    private boolean validate(String username, String password) {
-        return false;
+    // Returns user_id, or -1 if not found
+    private int fetchUserId(String username, String password) {
+        return LoginDB.fetchUserId(username, password);
     }
 
 }
