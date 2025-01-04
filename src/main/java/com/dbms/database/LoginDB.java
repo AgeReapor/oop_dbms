@@ -1,5 +1,6 @@
 package com.dbms.database;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,21 +8,21 @@ import java.sql.SQLException;
 public class LoginDB {
 
     // returns user_id, or -1 if not found
-    public static int fetchUserId(String username, String password) {
+    public static int fetchUserId(String username, String password) throws SQLException {
         int ret = -1;
 
-        String query = "SELECT user_id FROM user_account WHERE username = '" + username + "' AND password = '"
+        String query = "SELECT user_id FROM `" + DBConnection.getDBName() + "`.`user_account` WHERE username = '"
+                + username + "' AND password = '"
                 + password + "'";
 
-        try {
-            PreparedStatement stmt = DBConnection.getConnection().prepareStatement(query);
-            ResultSet rs = DBConnection.executeQuery(stmt, "User found.", "User not found.");
-            if (rs.next()) {
-                ret = rs.getInt("user_id");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            ret = rs.getInt("user_id");
         }
+        conn.close();
 
         return ret;
     }

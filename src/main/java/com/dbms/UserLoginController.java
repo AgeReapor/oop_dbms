@@ -2,6 +2,7 @@ package com.dbms;
 
 import com.dbms.database.LoginDB;
 import com.dbms.database.SetupDB;
+import com.dbms.utils.ThrowAlert;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 
 public class UserLoginController {
@@ -37,12 +39,13 @@ public class UserLoginController {
         System.out.println("Password: " + password);
 
         int userId = fetchUserId(username, password);
-
         if (userId == -1) {
+            System.out.println("Invalid username or password.");
             t_invalidWarning.setOpacity(1);
             return;
         }
 
+        System.out.println("Found user `" + username + "`.");
         t_invalidWarning.setOpacity(0);
     }
 
@@ -54,7 +57,13 @@ public class UserLoginController {
 
     // Returns user_id, or -1 if not found
     private int fetchUserId(String username, String password) {
-        return LoginDB.fetchUserId(username, password);
+        try {
+            return LoginDB.fetchUserId(username, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            ThrowAlert.throwAlert("Error", "SQL Error", e.getMessage(), AlertType.ERROR);
+            return -1;
+        }
     }
 
 }

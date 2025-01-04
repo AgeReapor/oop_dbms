@@ -1,5 +1,6 @@
 package com.dbms.database;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -21,12 +22,11 @@ public class SetupDB {
     private static void initDB() throws SQLException {
         String dbName = DBConnection.getDBName();
         String query = "CREATE DATABASE IF NOT EXISTS " + dbName + ";";
-        PreparedStatement stmt = DBConnection.getConnection().prepareStatement(query);
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
 
-        String successMsg = "Database `" + dbName + "` initialized.";
-        String failMsg = "Failed to initialize database `" + dbName + "`.";
-
-        DBConnection.execute(stmt, successMsg, failMsg);
+        stmt.execute();
+        conn.close();
     }
 
     // Initializes the `user_account` table
@@ -42,10 +42,10 @@ public class SetupDB {
                 "  PRIMARY KEY (`user_id`),\n" +
                 "  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE\n" +
                 ");";
-        PreparedStatement stmt = DBConnection.getConnection().prepareStatement(query);
-        String successMsg = "Table `user_account` initialized.";
-        String failMsg = "Failed to initialize table `user_account`.";
-        DBConnection.execute(stmt, successMsg, failMsg);
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.execute();
+        conn.close();
     }
 
     // Initializes the `business_clearance_transaction` table
@@ -67,12 +67,11 @@ public class SetupDB {
                 "  `status` INT NOT NULL DEFAULT 1,\n" +
                 "  PRIMARY KEY (`transaction_id`)\n" +
                 ");";
-        PreparedStatement stmt = DBConnection.getConnection().prepareStatement(query);
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
 
-        String successMsg = "Table `business_clearance_transaction` initialized.";
-        String failMsg = "Failed to initialize table `business_clearance_transaction`.";
-
-        DBConnection.execute(stmt, successMsg, failMsg);
+        stmt.execute();
+        conn.close();
     }
 
 }
