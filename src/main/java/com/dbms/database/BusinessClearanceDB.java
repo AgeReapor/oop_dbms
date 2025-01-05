@@ -82,4 +82,50 @@ public class BusinessClearanceDB {
         stmt.execute();
         conn.close();
     }
+
+    public static void updateBusinessClearanceTransaction(BusinessClearanceTransaction transaction)
+            throws SQLException {
+        int transactionId = transaction.getTransactionId();
+        String inspectionType = transaction.getInspectionType().toString();
+        String owner = transaction.getOwner();
+        String ownerAddress = transaction.getOwnerAddress();
+        String businessName = transaction.getBusinessName();
+        String businessAddress = transaction.getBusinessAddress();
+        String businessType = transaction.getBusinessType();
+        String contactNumber = transaction.getContactNumber();
+        String propertyType = transaction.getPropertyType().toString();
+        String registrationNumber = transaction.getRegistrationNumber();
+        String inspector = transaction.getInspector();
+        String inspectionDate = transaction.getInspectionDate().toString();
+        String amount = transaction.getAmount().toString();
+        String officialReceiptNumber = transaction.getOfficialReceiptNumber();
+
+        String query = "UPDATE `" + DBConnection.getDBName()
+                + "`.`business_clearance_transaction` SET "
+                + "`inspection_type` = '" + inspectionType + "', `owner` = '" + owner + "', `owner_address` = '"
+                + ownerAddress + "', `business_address` = '" + businessAddress + "', `business_name` = '" + businessName
+                + "', `business_type` = '" + businessType + "', `contact_number` = '" + contactNumber
+                + "', `property_type` = '" + propertyType + "', `registration_number` = '" + registrationNumber
+                + "', `inspector` = '" + inspector + "', `inspection_date` = '" + inspectionDate + "', `amount` = '"
+                + amount + "', `official_receipt_number` = '" + officialReceiptNumber + "' WHERE `transaction_id` = "
+                + transactionId + ";";
+
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+
+        stmt.execute();
+        conn.close();
+    }
+
+    public static void deleteBusinessClearanceTransaction(int transactionId) throws SQLException {
+        // set status to 0
+        String query = "UPDATE `" + DBConnection.getDBName()
+                + "`.`business_clearance_transaction` SET `status` = 0 WHERE `transaction_id` = " + transactionId + ";";
+
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+
+        stmt.execute();
+        conn.close();
+    }
 }

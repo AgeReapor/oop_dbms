@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
@@ -23,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class BusinessClearanceEntryController implements Initializable {
 
@@ -38,6 +40,9 @@ public class BusinessClearanceEntryController implements Initializable {
     VBox vb_scrollContent;
 
     @FXML
+    Text t_headerAdd, t_headerUpdate;
+
+    @FXML
     ToggleGroup propertyTypeGroup, inspectionTypeGroup;
 
     @FXML
@@ -50,10 +55,13 @@ public class BusinessClearanceEntryController implements Initializable {
             hb_businessTypeValidator, hb_contactNumberValidator, hb_propertyTypeValidator, hb_regNoValidator,
             hb_inspectionTypeValidator, hb_inspectorValidator, hb_dateValidator, hb_amountValidator, hb_ORNoValidator;
 
+    @FXML
+    Button btn_add, btn_update;
+
     public BusinessClearanceEntryController() {
         System.out.println("New User Account.");
-        transactionId = -1;
-        isUpdate = false;
+        transactionId = 5;
+        isUpdate = true;
         this.mainViewController = null;
         transaction = loadBusinessClearanceTransaction(transactionId);
     }
@@ -84,6 +92,16 @@ public class BusinessClearanceEntryController implements Initializable {
 
         // add event handlers for validation
         bindValidationEvents();
+
+        // Hide add if updating
+        if (isUpdate) {
+            btn_add.setVisible(false);
+            t_headerAdd.setVisible(false);
+        } else {
+            btn_update.setVisible(false);
+            t_headerUpdate.setVisible(false);
+        }
+
     }
 
     private BusinessClearanceTransaction loadBusinessClearanceTransaction(int transactionId) {
@@ -162,6 +180,57 @@ public class BusinessClearanceEntryController implements Initializable {
             // mainViewController.openBusinessClearanceListView();
         } catch (SQLException e) {
             ThrowAlert.throwAlert("Error", "Failed to add Business Clearance Transaction", e.getMessage(),
+                    Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    void updateHandler() {
+        if (!isAllValid()) {
+            ThrowAlert.throwAlert("Error", "Invalid Input", "Please fill out all required fields.",
+                    Alert.AlertType.ERROR);
+            return;
+        }
+        if (!ThrowAlert.confirmAlert("Update Business Clearance Transaction",
+                "Are you sure you want to update this Business Clearance Transaction?", "")) {
+            return;
+        }
+
+        try {
+            transaction.setOwner(tf_owner.getText());
+            transaction.setOwnerAddress(tf_ownerAddress.getText());
+            transaction.setBusinessName(tf_businessName.getText());
+            transaction.setBusinessAddress(tf_businessAddress.getText());
+            transaction.setBusinessType(tf_businessType.getText());
+            transaction.setContactNumber(tf_contactNumber.getText());
+            transaction.setOfficialReceiptNumber(tf_ORNo.getText());
+            transaction.setInspector(tf_inspector.getText());
+            transaction.setAmount(new BigDecimal(tf_amount.getText()));
+            transaction.setOfficialReceiptNumber(tf_ORNo.getText());
+            transaction.setInspectionDate(dp_date.getValue());
+            transaction.setRegistrationNumber(tf_regNo.getText());
+
+            RadioButton selectedInspectionType = (RadioButton) inspectionTypeGroup.getSelectedToggle();
+            String inspectionTypeStr = selectedInspectionType.getText();
+
+            RadioButton selectedPropertyType = (RadioButton) propertyTypeGroup.getSelectedToggle();
+            String propertyTypeStr = selectedPropertyType.getText();
+
+            transaction.setInspectionType(inspectionTypeStr);
+            transaction.setPropertyType(propertyTypeStr);
+        } catch (Exception e) {
+            ThrowAlert.throwAlert("Error", "Invalid Input", e.getMessage(), Alert.AlertType.ERROR);
+            return;
+        }
+
+        try {
+            BusinessClearanceDB.updateBusinessClearanceTransaction(transaction);
+            ThrowAlert.throwAlert("Success", "Business Clearance Transaction Updated",
+                    "Business Clearance Transaction updated successfully.",
+                    Alert.AlertType.INFORMATION);
+            // mainViewController.openBusinessClearanceListView();
+        } catch (SQLException e) {
+            ThrowAlert.throwAlert("Error", "Failed to update Business Clearance Transaction", e.getMessage(),
                     Alert.AlertType.ERROR);
         }
     }
