@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="bp_businessClearanceEntry" prefHeight="752.0" prefWidth="1040.0" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.BusinessClearanceEntryController">
+<BorderPane fx:id="bp_businessClearanceEntry" prefHeight="752.0" prefWidth="1040.0" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <ScrollPane fx:id="sp_scrollpane" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
          <content>
@@ -72,13 +72,13 @@
                         <HBox fx:id="hb_propertyTypeValidator" alignment="CENTER_LEFT" prefHeight="42.0" spacing="24.0">
                            <children>
                               <Label prefWidth="180.0" text="Property Type" />
-                              <RadioButton mnemonicParsing="false" text="Owned">
+                              <RadioButton fx:id="rb_owned" mnemonicParsing="false" text="Owned">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="propertyTypeGroup" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton mnemonicParsing="false" text="Rented" toggleGroup="$propertyTypeGroup" />
-                              <RadioButton mnemonicParsing="false" text="Lessor" toggleGroup="$propertyTypeGroup" />
+                              <RadioButton fx:id="rb_rented" mnemonicParsing="false" text="Rented" toggleGroup="$propertyTypeGroup" />
+                              <RadioButton fx:id="rb_lessor" mnemonicParsing="false" text="Lessor" toggleGroup="$propertyTypeGroup" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="invalid-warning" text="Please select one" />
                            </children>
                         </HBox>
@@ -96,12 +96,12 @@
                         <HBox fx:id="hb_inspectionTypeValidator" alignment="CENTER_LEFT" prefHeight="42.0" spacing="24.0">
                            <children>
                               <Label prefWidth="180.0" text="Inspection Type" />
-                              <RadioButton mnemonicParsing="false" text="New">
+                              <RadioButton fx:id="rb_new" mnemonicParsing="false" text="New">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="inspectionTypeGroup" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton mnemonicParsing="false" text="Renewal" toggleGroup="$inspectionTypeGroup" />
+                              <RadioButton fx:id="rb_renewal" mnemonicParsing="false" text="Renewal" toggleGroup="$inspectionTypeGroup" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="invalid-warning" text="Please select one" />
                            </children>
                         </HBox>
@@ -149,7 +149,7 @@
                                  </children>
                               </StackPane>
                               <Button fx:id="btn_clear" mnemonicParsing="false" onAction="#clearHandler" text="Clear" />
-                              <Button fx:id="btn_close" mnemonicParsing="false" styleClass="btn-close" text="Close" />
+                              <Button fx:id="btn_close" mnemonicParsing="false" onAction="#closeHandler" styleClass="btn-close" text="Close" />
                            </children>
                            <VBox.margin>
                               <Insets top="64.0" />

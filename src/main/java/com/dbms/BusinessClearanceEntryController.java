@@ -3,14 +3,13 @@ package com.dbms;
 import com.dbms.database.BusinessClearanceDB;
 import com.dbms.models.BusinessClearanceTransaction;
 import com.dbms.models.InspectionType;
-import com.dbms.models.PropertyType;
 import com.dbms.utils.NodeValidation;
 import com.dbms.utils.ThrowAlert;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -33,6 +32,23 @@ public class BusinessClearanceEntryController implements Initializable {
     private final BusinessClearanceTransaction transaction;
     private final MainViewController mainViewController;
 
+    public BusinessClearanceEntryController(MainViewController mainViewController) {
+        System.out.println("New User Account.");
+        transactionId = -1;
+        isUpdate = false;
+        this.mainViewController = mainViewController;
+        transaction = loadBusinessClearanceTransaction(transactionId);
+    }
+
+    public BusinessClearanceEntryController(MainViewController mainViewController, int transactionId) {
+        System.out.println("Update User Account.");
+        this.transactionId = transactionId;
+        isUpdate = true;
+        this.mainViewController = mainViewController;
+        System.out.println("TransactionId: " + transactionId);
+        transaction = loadBusinessClearanceTransaction(transactionId);
+    }
+
     @FXML
     ScrollPane sp_scrollpane;
 
@@ -44,6 +60,9 @@ public class BusinessClearanceEntryController implements Initializable {
 
     @FXML
     ToggleGroup propertyTypeGroup, inspectionTypeGroup;
+
+    @FXML
+    RadioButton rb_owned, rb_rented, rb_lessor, rb_new, rb_renewal;
 
     @FXML
     TextField tf_owner, tf_ownerAddress, tf_businessName, tf_businessAddress, tf_businessType, tf_contactNumber,
@@ -58,33 +77,47 @@ public class BusinessClearanceEntryController implements Initializable {
     @FXML
     Button btn_add, btn_update;
 
-    public BusinessClearanceEntryController() {
-        System.out.println("New User Account.");
-        transactionId = 5;
-        isUpdate = true;
-        this.mainViewController = null;
-        transaction = loadBusinessClearanceTransaction(transactionId);
-    }
-
-    public BusinessClearanceEntryController(MainViewController mainViewController) {
-        System.out.println("New User Account.");
-        transactionId = -1;
-        isUpdate = false;
-        this.mainViewController = mainViewController;
-        transaction = loadBusinessClearanceTransaction(transactionId);
-    }
-
-    public BusinessClearanceEntryController(MainViewController mainViewController, int transactionId) {
-        System.out.println("Update User Account.");
-        this.transactionId = transactionId;
-        isUpdate = true;
-        transaction = loadBusinessClearanceTransaction(transactionId);
-        this.mainViewController = mainViewController;
-        System.out.println("UserId: " + transactionId);
-    }
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+
+        // Populate Fields
+        tf_owner.setText(transaction.getOwner());
+        tf_ownerAddress.setText(transaction.getOwnerAddress());
+        tf_businessName.setText(transaction.getBusinessName());
+        tf_businessAddress.setText(transaction.getBusinessAddress());
+        tf_businessType.setText(transaction.getBusinessType());
+        tf_contactNumber.setText(transaction.getContactNumber());
+        tf_regNo.setText(transaction.getRegistrationNumber());
+        tf_inspector.setText(transaction.getInspector());
+        tf_amount.setText(transaction.getAmount().toString());
+        tf_ORNo.setText(transaction.getOfficialReceiptNumber());
+        dp_date.setValue(transaction.getInspectionDate());
+
+        // Populate ToggleGroups if not null
+        if (transaction != null && transaction.getInspectionType() != null) {
+            switch (transaction.getInspectionType()) {
+                case NEW:
+                    rb_new.fire();
+                    break;
+                case RENEWAL:
+                    rb_renewal.fire();
+                    break;
+            }
+        }
+
+        if (transaction != null && transaction.getInspectionType() != null) {
+            switch (transaction.getPropertyType()) {
+                case OWNED:
+                    rb_owned.fire();
+                    break;
+                case RENTED:
+                    rb_rented.fire();
+                    break;
+                case LESSOR:
+                    rb_lessor.fire();
+                    break;
+            }
+        }
 
         // Always resize width of scroll content to scrollpane width
         sp_scrollpane.widthProperty()
@@ -101,6 +134,13 @@ public class BusinessClearanceEntryController implements Initializable {
             btn_update.setVisible(false);
             t_headerUpdate.setVisible(false);
         }
+
+        // increase scroll speed
+        final double SPEED = 0.01;
+        sp_scrollpane.getContent().setOnScroll(scrollEvent -> {
+            double deltaY = scrollEvent.getDeltaY() * SPEED;
+            sp_scrollpane.setVvalue(sp_scrollpane.getVvalue() - deltaY);
+        });
 
     }
 
@@ -177,8 +217,8 @@ public class BusinessClearanceEntryController implements Initializable {
             ThrowAlert.throwAlert("Success", "Business Clearance Transaction Added",
                     "Business Clearance Transaction added successfully.",
                     Alert.AlertType.INFORMATION);
-            // mainViewController.openBusinessClearanceListView();
-        } catch (SQLException e) {
+            mainViewController.openbusinessClearanceListView();
+        } catch (Exception e) {
             ThrowAlert.throwAlert("Error", "Failed to add Business Clearance Transaction", e.getMessage(),
                     Alert.AlertType.ERROR);
         }
@@ -228,8 +268,8 @@ public class BusinessClearanceEntryController implements Initializable {
             ThrowAlert.throwAlert("Success", "Business Clearance Transaction Updated",
                     "Business Clearance Transaction updated successfully.",
                     Alert.AlertType.INFORMATION);
-            // mainViewController.openBusinessClearanceListView();
-        } catch (SQLException e) {
+            mainViewController.openbusinessClearanceListView();
+        } catch (Exception e) {
             ThrowAlert.throwAlert("Error", "Failed to update Business Clearance Transaction", e.getMessage(),
                     Alert.AlertType.ERROR);
         }
@@ -248,6 +288,8 @@ public class BusinessClearanceEntryController implements Initializable {
         tf_amount.clear();
         tf_ORNo.clear();
         dp_date.setValue(null);
+        inspectionTypeGroup.selectToggle(null);
+        propertyTypeGroup.selectToggle(null);
         NodeValidation.removeInvalidStyle(hb_ownerValidator);
         NodeValidation.removeInvalidStyle(hb_ownerAddressValidator);
         NodeValidation.removeInvalidStyle(hb_businessNameValidator);
@@ -261,6 +303,19 @@ public class BusinessClearanceEntryController implements Initializable {
         NodeValidation.removeInvalidStyle(hb_dateValidator);
         NodeValidation.removeInvalidStyle(hb_amountValidator);
         NodeValidation.removeInvalidStyle(hb_ORNoValidator);
+        NodeValidation.removeInvalidStyle(hb_inspectionTypeValidator);
+        NodeValidation.removeInvalidStyle(hb_propertyTypeValidator);
+    }
+
+    @FXML
+    void closeHandler() {
+        try {
+            if (ThrowAlert.confirmAlert("Close", "Are you sure? Any unsaved changes will be lost.", ""))
+                mainViewController.openbusinessClearanceListView();
+        } catch (IOException e) {
+            ThrowAlert.throwAlert("Error", "Failed to open Business Clearance List View", e.getMessage(),
+                    Alert.AlertType.ERROR);
+        }
     }
 
     private boolean isAllValid() {

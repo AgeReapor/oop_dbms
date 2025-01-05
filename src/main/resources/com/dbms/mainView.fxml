@@ -44,7 +44,8 @@
             </VBox>
             <Button fx:id="btn_userManagement" mnemonicParsing="false" onAction="#openUserAccountListView" text="User Management" />
             <Button fx:id="btn_addUserAccount" mnemonicParsing="false" onAction="#openUserAccountDataEntryView" text="Add User Account" />
-            <Button fx:id="btn_businessClearance" mnemonicParsing="false" onAction="#openbusinessClearanceEntryView" text="Business Clearace" />
+            <Button fx:id="btn_clearanceManagement" mnemonicParsing="false" onAction="#openbusinessClearanceListView" text="Clearance Records" />
+            <Button fx:id="btn_clearanceEntry" mnemonicParsing="false" onAction="#openbusinessClearanceEntryView" text="Add Business Clearance" />
             <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
                   <Button fx:id="btn_logout" mnemonicParsing="false" onAction="#logout" text="Log Out" />

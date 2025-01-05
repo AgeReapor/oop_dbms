@@ -62,7 +62,6 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void openUserAccountListView() throws IOException {
-        // Parent view = App.loadFXML("userAccountListView");
         FXMLLoader loader = App.getFXMLLoader("userAccountListView");
         Parent view = loader.load();
         UserAccountListController controller = loader.getController();
@@ -72,13 +71,27 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void openbusinessClearanceEntryView() throws IOException {
-        Parent view = App.loadFXML("businessClearanceEntryView");
+        FXMLLoader loader = App.getFXMLLoader("businessClearanceEntryView");
+        BusinessClearanceEntryController controller = new BusinessClearanceEntryController(this);
+        loader.setController(controller);
+        Parent view = loader.load();
+        bp_mainView.setCenter(view);
+    }
+
+    public void openbusinessClearanceEntryView(int transactionId) throws IOException {
+        FXMLLoader loader = App.getFXMLLoader("businessClearanceEntryView");
+        BusinessClearanceEntryController controller = new BusinessClearanceEntryController(this, transactionId);
+        loader.setController(controller);
+        Parent view = loader.load();
         bp_mainView.setCenter(view);
     }
 
     @FXML
     public void openbusinessClearanceListView() throws IOException {
-        Parent view = App.loadFXML("businessClearanceListView");
+        FXMLLoader loader = App.getFXMLLoader("businessClearanceListView");
+        Parent view = loader.load();
+        BusinessClearanceListController controller = loader.getController();
+        controller.setMainViewController(this);
         bp_mainView.setCenter(view);
     }
 

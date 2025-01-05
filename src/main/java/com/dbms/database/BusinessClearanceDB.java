@@ -6,10 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import com.dbms.models.BusinessClearanceTransaction;
 import com.dbms.models.InspectionType;
 import com.dbms.models.PropertyType;
+import com.dbms.utils.PopulateTable;
+
+import javafx.scene.control.TableView;
 
 public class BusinessClearanceDB {
 
@@ -42,7 +46,8 @@ public class BusinessClearanceDB {
             String officialReceiptNumber = rs.getString("official_receipt_number");
 
             transaction = new BusinessClearanceTransaction(TRANSACTION_ID, inspectionType, owner,
-                    ownerAddress, businessAddress, businessName, businessType, contactNumber, propertyType,
+                    ownerAddress, businessAddress, businessName, businessType, contactNumber,
+                    propertyType,
                     registrationNumber, inspector, inspectionDate, amount, officialReceiptNumber);
         }
         conn.close();
@@ -71,9 +76,12 @@ public class BusinessClearanceDB {
                 + "`inspection_type`, `owner`, `owner_address`, `business_address`, `business_name`, `business_type`, `contact_number`, "
                 + "`property_type`, `registration_number`, `inspector`, `inspection_date`, `amount`, `official_receipt_number`"
                 + ") VALUES ("
-                + "'" + inspectionType + "', '" + owner + "', '" + ownerAddress + "', '" + businessAddress + "', '"
-                + businessName + "', '" + businessType + "', '" + contactNumber + "', '" + propertyType + "', '"
-                + registrationNumber + "', '" + inspector + "', '" + inspectionDate + "', '" + amount + "', '"
+                + "'" + inspectionType + "', '" + owner + "', '" + ownerAddress + "', '"
+                + businessAddress + "', '"
+                + businessName + "', '" + businessType + "', '" + contactNumber + "', '" + propertyType
+                + "', '"
+                + registrationNumber + "', '" + inspector + "', '" + inspectionDate + "', '" + amount
+                + "', '"
                 + officialReceiptNumber + "');";
 
         Connection conn = DBConnection.getConnection();
@@ -102,12 +110,17 @@ public class BusinessClearanceDB {
 
         String query = "UPDATE `" + DBConnection.getDBName()
                 + "`.`business_clearance_transaction` SET "
-                + "`inspection_type` = '" + inspectionType + "', `owner` = '" + owner + "', `owner_address` = '"
-                + ownerAddress + "', `business_address` = '" + businessAddress + "', `business_name` = '" + businessName
+                + "`inspection_type` = '" + inspectionType + "', `owner` = '" + owner
+                + "', `owner_address` = '"
+                + ownerAddress + "', `business_address` = '" + businessAddress
+                + "', `business_name` = '" + businessName
                 + "', `business_type` = '" + businessType + "', `contact_number` = '" + contactNumber
-                + "', `property_type` = '" + propertyType + "', `registration_number` = '" + registrationNumber
-                + "', `inspector` = '" + inspector + "', `inspection_date` = '" + inspectionDate + "', `amount` = '"
-                + amount + "', `official_receipt_number` = '" + officialReceiptNumber + "' WHERE `transaction_id` = "
+                + "', `property_type` = '" + propertyType + "', `registration_number` = '"
+                + registrationNumber
+                + "', `inspector` = '" + inspector + "', `inspection_date` = '" + inspectionDate
+                + "', `amount` = '"
+                + amount + "', `official_receipt_number` = '" + officialReceiptNumber
+                + "' WHERE `transaction_id` = "
                 + transactionId + ";";
 
         Connection conn = DBConnection.getConnection();
@@ -120,12 +133,56 @@ public class BusinessClearanceDB {
     public static void deleteBusinessClearanceTransaction(int transactionId) throws SQLException {
         // set status to 0
         String query = "UPDATE `" + DBConnection.getDBName()
-                + "`.`business_clearance_transaction` SET `status` = 0 WHERE `transaction_id` = " + transactionId + ";";
+                + "`.`business_clearance_transaction` SET `status` = 0 WHERE `transaction_id` = "
+                + transactionId + ";";
 
         Connection conn = DBConnection.getConnection();
         PreparedStatement stmt = conn.prepareStatement(query);
 
         stmt.execute();
         conn.close();
+    }
+
+    public static void populateTable(TableView tableView) throws SQLException {
+        String query = "SELECT transaction_id, inspection_type, owner, owner_address, business_name, business_address, business_type, contact_number, property_type, registration_number, inspector, inspection_date, amount, official_receipt_number FROM `"
+                + DBConnection.getDBName()
+                + "`.`business_clearance_transaction` WHERE status = 1;";
+
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
+
+        PopulateTable.populateTable(tableView, rs);
+        conn.close();
+    }
+
+    public static void populateSearchResults(TableView tableView, String searchString, ArrayList<String> searchOptions)
+            throws SQLException {
+        ResultSet rs = searchQuery(searchString, searchOptions);
+        PopulateTable.populateTable(tableView, rs);
+    }
+
+    private static ResultSet searchQuery(String searchString, ArrayList<String> searchOptions) throws SQLException {
+        String query = "SELECT transaction_id, inspection_type, owner, owner_address, business_name, business_address, business_type, contact_number, property_type, registration_number, inspector, inspection_date, amount, official_receipt_number FROM `"
+                + DBConnection.getDBName()
+                + "`.`business_clearance_transaction` WHERE status = 1 AND (";
+
+        for (int i = 0; i < searchOptions.size(); i++) {
+            query += searchOptions.get(i) + " LIKE ? ";
+            if (i < searchOptions.size() - 1) {
+                query += "OR ";
+            }
+        }
+
+        query += ");";
+
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        for (int i = 0; i < searchOptions.size(); i++) {
+            stmt.setString(i + 1, "%" + searchString + "%");
+        }
+        ResultSet rs = stmt.executeQuery();
+
+        return rs;
     }
 }
