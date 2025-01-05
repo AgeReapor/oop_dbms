@@ -74,6 +74,10 @@ public class BusinessClearanceTransaction {
         this.inspectionType = inspectionType;
     }
 
+    public void setInspectionType(String inspectionTypeStr) {
+        this.inspectionType = InspectionType.fromString(inspectionTypeStr);
+    }
+
     public String getOwner() {
         return owner;
     }
@@ -128,6 +132,10 @@ public class BusinessClearanceTransaction {
 
     public void setPropertyType(PropertyType propertyType) {
         this.propertyType = propertyType;
+    }
+
+    public void setPropertyType(String propertyTypeStr) {
+        this.propertyType = PropertyType.fromString(propertyTypeStr);
     }
 
     public String getRegistrationNumber() {

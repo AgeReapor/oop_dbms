@@ -54,10 +54,10 @@ public class SetupDB {
                 + "`.`business_clearance_transaction` (\n" +
                 "  `transaction_id` INT NOT NULL AUTO_INCREMENT,\n" +
                 "  `inspection_type` ENUM('new', 'renewal') NOT NULL,\n" +
-                "  `business_name` VARCHAR(255) NOT NULL,\n" +
+                "  `owner` VARCHAR(255) NOT NULL,\n" +
                 "  `owner_address` VARCHAR(75) NOT NULL,\n" +
-                "  `business_address` VARCHAR(255) NOT NULL,\n" +
                 "  `business_name` VARCHAR(255) NOT NULL,\n" +
+                "  `business_address` VARCHAR(255) NOT NULL,\n" +
                 "  `business_type` VARCHAR(25) NOT NULL,\n" +
                 "  `contact_number` VARCHAR(20) NOT NULL,\n" +
                 "  `property_type` ENUM('owned', 'rented', 'lessor') NOT NULL,\n" +

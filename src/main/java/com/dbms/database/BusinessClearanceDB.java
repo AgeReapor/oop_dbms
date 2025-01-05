@@ -15,7 +15,7 @@ public class BusinessClearanceDB {
 
     public static BusinessClearanceTransaction fetchBusinessClearanceTransaction(int transactionId)
             throws SQLException {
-        BusinessClearanceTransaction businessClearanceTransaction = null;
+        BusinessClearanceTransaction transaction = null;
         String query = "SELECT * FROM `" + DBConnection.getDBName()
                 + "`.`business_clearance_transaction` WHERE transaction_id = "
                 + transactionId + ";";
@@ -41,30 +41,30 @@ public class BusinessClearanceDB {
             BigDecimal amount = rs.getBigDecimal("amount");
             String officialReceiptNumber = rs.getString("official_receipt_number");
 
-            businessClearanceTransaction = new BusinessClearanceTransaction(TRANSACTION_ID, inspectionType, owner,
+            transaction = new BusinessClearanceTransaction(TRANSACTION_ID, inspectionType, owner,
                     ownerAddress, businessAddress, businessName, businessType, contactNumber, propertyType,
                     registrationNumber, inspector, inspectionDate, amount, officialReceiptNumber);
         }
         conn.close();
 
-        return businessClearanceTransaction;
+        return transaction;
     }
 
-    public static void addBusinessClearanceTransaction(BusinessClearanceTransaction businessClearanceTransaction)
+    public static void addBusinessClearanceTransaction(BusinessClearanceTransaction transaction)
             throws SQLException {
-        String inspectionType = businessClearanceTransaction.getInspectionType().toString();
-        String owner = businessClearanceTransaction.getOwner();
-        String ownerAddress = businessClearanceTransaction.getOwnerAddress();
-        String businessName = businessClearanceTransaction.getBusinessName();
-        String businessAddress = businessClearanceTransaction.getBusinessAddress();
-        String businessType = businessClearanceTransaction.getBusinessType();
-        String contactNumber = businessClearanceTransaction.getContactNumber();
-        String propertyType = businessClearanceTransaction.getPropertyType().toString();
-        String registrationNumber = businessClearanceTransaction.getRegistrationNumber();
-        String inspector = businessClearanceTransaction.getInspector();
-        String inspectionDate = businessClearanceTransaction.getInspectionDate().toString();
-        String amount = businessClearanceTransaction.getAmount().toString();
-        String officialReceiptNumber = businessClearanceTransaction.getOfficialReceiptNumber();
+        String inspectionType = transaction.getInspectionType().toString();
+        String owner = transaction.getOwner();
+        String ownerAddress = transaction.getOwnerAddress();
+        String businessName = transaction.getBusinessName();
+        String businessAddress = transaction.getBusinessAddress();
+        String businessType = transaction.getBusinessType();
+        String contactNumber = transaction.getContactNumber();
+        String propertyType = transaction.getPropertyType().toString();
+        String registrationNumber = transaction.getRegistrationNumber();
+        String inspector = transaction.getInspector();
+        String inspectionDate = transaction.getInspectionDate().toString();
+        String amount = transaction.getAmount().toString();
+        String officialReceiptNumber = transaction.getOfficialReceiptNumber();
 
         String query = "INSERT INTO `" + DBConnection.getDBName()
                 + "`.`business_clearance_transaction` ("

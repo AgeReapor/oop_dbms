@@ -33,43 +33,43 @@
                               <Insets bottom="12.0" top="32.0" />
                            </VBox.margin>
                         </Text>
-                        <HBox fx:id="hb_usernameValidator1" alignment="CENTER_LEFT" prefHeight="42.0">
+                        <HBox fx:id="hb_ownerValidator" alignment="CENTER_LEFT" prefHeight="42.0">
                            <children>
                               <Label prefWidth="180.0" text="Owner's Name" />
                               <TextField fx:id="tf_owner" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <HBox fx:id="hb_usernameValidator11" alignment="CENTER_LEFT" prefHeight="42.0">
+                        <HBox fx:id="hb_ownerAddressValidator" alignment="CENTER_LEFT" prefHeight="42.0">
                            <children>
                               <Label prefWidth="180.0" text="Owner's Address" />
-                              <TextField fx:id="me11" HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="tf_ownerAddress" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <HBox fx:id="hb_usernameValidator111" alignment="CENTER_LEFT" prefHeight="42.0">
+                        <HBox fx:id="hb_businessNameValidator" alignment="CENTER_LEFT" prefHeight="42.0">
                            <children>
                               <Label prefWidth="180.0" text="Business Name" />
-                              <TextField HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="tf_businessName" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <HBox fx:id="hb_usernameValidator112" alignment="CENTER_LEFT" prefHeight="42.0">
+                        <HBox fx:id="hb_businessAddressValidator" alignment="CENTER_LEFT" prefHeight="42.0">
                            <children>
                               <Label prefWidth="180.0" text="Business Address" />
-                              <TextField HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="tf_businessAddress" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <HBox fx:id="hb_usernameValidator113" alignment="CENTER_LEFT" prefHeight="42.0">
+                        <HBox fx:id="hb_businessTypeValidator" alignment="CENTER_LEFT" prefHeight="42.0">
                            <children>
                               <Label prefWidth="180.0" text="Business Type" />
-                              <TextField HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="tf_businessType" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <HBox fx:id="hb_usernameValidator1131" alignment="CENTER_LEFT" prefHeight="42.0">
+                        <HBox fx:id="hb_contactNumberValidator" alignment="CENTER_LEFT" prefHeight="42.0">
                            <children>
                               <Label prefWidth="180.0" text="Contact Number" />
-                              <TextField HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="tf_contactNumber" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <HBox fx:id="hb_usernameValidator1141" alignment="CENTER_LEFT" prefHeight="42.0" spacing="24.0">
+                        <HBox fx:id="hb_propertyTypeValidator" alignment="CENTER_LEFT" prefHeight="42.0" spacing="24.0">
                            <children>
                               <Label prefWidth="180.0" text="Property Type" />
                               <RadioButton mnemonicParsing="false" text="Owned">
@@ -79,12 +79,13 @@
                               </RadioButton>
                               <RadioButton mnemonicParsing="false" text="Rented" toggleGroup="$propertyTypeGroup" />
                               <RadioButton mnemonicParsing="false" text="Lessor" toggleGroup="$propertyTypeGroup" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="invalid-warning" text="Please select one" />
                            </children>
                         </HBox>
-                        <HBox fx:id="hb_usernameValidator114" alignment="CENTER_LEFT" prefHeight="42.0">
+                        <HBox fx:id="hb_regNoValidator" alignment="CENTER_LEFT" prefHeight="42.0">
                            <children>
                               <Label prefWidth="180.0" text="DTI/SEC Reg No." />
-                              <TextField HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="tf_regNo" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Inspection Details">
@@ -92,7 +93,7 @@
                               <Insets bottom="12.0" top="32.0" />
                            </VBox.margin>
                         </Text>
-                        <HBox fx:id="hb_usernameValidator11411" alignment="CENTER_LEFT" prefHeight="42.0" spacing="24.0">
+                        <HBox fx:id="hb_inspectionTypeValidator" alignment="CENTER_LEFT" prefHeight="42.0" spacing="24.0">
                            <children>
                               <Label prefWidth="180.0" text="Inspection Type" />
                               <RadioButton mnemonicParsing="false" text="New">
@@ -101,18 +102,24 @@
                                  </toggleGroup>
                               </RadioButton>
                               <RadioButton mnemonicParsing="false" text="Renewal" toggleGroup="$inspectionTypeGroup" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="invalid-warning" text="Please select one" />
                            </children>
                         </HBox>
-                        <HBox fx:id="hb_usernameValidator1143" alignment="CENTER_LEFT" prefHeight="42.0">
+                        <HBox fx:id="hb_inspectorValidator" alignment="CENTER_LEFT" prefHeight="42.0">
                            <children>
                               <Label prefWidth="180.0" text="Inspector" />
-                              <TextField HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="tf_inspector" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <HBox fx:id="hb_usernameValidator1142" alignment="CENTER_LEFT" prefHeight="42.0">
+                        <HBox fx:id="hb_dateValidator" alignment="CENTER_LEFT" prefHeight="42.0">
                            <children>
                               <Label prefWidth="180.0" text="Date" />
-                              <DatePicker />
+                              <DatePicker fx:id="dp_date" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="invalid-warning" text="Please select a valid date">
+                                 <HBox.margin>
+                                    <Insets left="12.0" />
+                                 </HBox.margin>
+                              </Text>
                            </children>
                         </HBox>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="For Barangay Officer">
@@ -120,39 +127,33 @@
                               <Insets top="32.0" />
                            </VBox.margin>
                         </Text>
-                        <HBox fx:id="hb_usernameValidator1144" alignment="CENTER_LEFT" prefHeight="42.0" spacing="12.0">
+                        <HBox fx:id="hb_amountValidator" alignment="CENTER_LEFT" prefHeight="42.0" spacing="12.0">
                            <children>
                               <Label prefWidth="180.0" text="Amount" />
                               <Label text="Php" HBox.hgrow="NEVER" />
-                              <TextField HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="tf_amount" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <HBox fx:id="hb_usernameValidator1145" alignment="CENTER_LEFT" prefHeight="42.0">
+                        <HBox fx:id="hb_ORNoValidator" alignment="CENTER_LEFT" prefHeight="42.0">
                            <children>
                               <Label prefWidth="180.0" text="OR. Number:" />
-                              <TextField HBox.hgrow="ALWAYS" />
+                              <TextField fx:id="tf_ORNo" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="action-btn-group">
                            <children>
+                              <Button fx:id="btn_update" mnemonicParsing="false" styleClass="btn-save" text="Update" />
                               <StackPane alignment="CENTER_RIGHT">
                                  <children>
-                                    <Button fx:id="btn_add" mnemonicParsing="false" styleClass="btn-save" text="Add" />
-                                    <Button fx:id="btn_update" mnemonicParsing="false" styleClass="btn-save" text="Update" />
+                                    <Button fx:id="btn_add" mnemonicParsing="false" onAction="#addHandler" styleClass="btn-save" text="Add" />
                                  </children>
                               </StackPane>
-                              <Button fx:id="btn_clear" mnemonicParsing="false" text="Clear" />
+                              <Button fx:id="btn_clear" mnemonicParsing="false" onAction="#clearHandler" text="Clear" />
                               <Button fx:id="btn_close" mnemonicParsing="false" styleClass="btn-close" text="Close" />
                            </children>
                            <VBox.margin>
                               <Insets top="64.0" />
                            </VBox.margin>
-                        </HBox>
-                        <HBox fx:id="hb_usernameValidator1111" alignment="CENTER_LEFT" prefHeight="42.0">
-                           <children>
-                              <Label prefWidth="180.0" text="Business Name" />
-                              <TextField HBox.hgrow="ALWAYS" />
-                           </children>
                         </HBox>
                      </children>
                   </VBox>

@@ -130,6 +130,11 @@ public class UserAccountDataEntryController implements Initializable {
         tf_middlename.clear();
         tf_username.clear();
         tf_password.clear();
+        NodeValidation.removeInvalidStyle(vb_firstnameValidator);
+        NodeValidation.removeInvalidStyle(vb_lastnameValidator);
+        NodeValidation.removeInvalidStyle(vb_middlenameValidator);
+        NodeValidation.removeInvalidStyle(hb_usernameValidator);
+        NodeValidation.removeInvalidStyle(hb_passwordValidator);
     }
 
     @FXML
@@ -193,16 +198,32 @@ public class UserAccountDataEntryController implements Initializable {
     }
 
     private boolean isAllValid() {
-        if (tf_lastname.getText().isEmpty())
-            return false;
-        if (tf_firstname.getText().isEmpty())
-            return false;
-        if (tf_middlename.getText().isEmpty())
-            return false;
-        if (tf_username.getText().isEmpty())
-            return false;
-        if (tf_password.getText().isEmpty())
-            return false;
-        return true;
+        boolean isValid = true;
+        if (tf_lastname.getText().isEmpty()) {
+            NodeValidation.addInvalidStyle(vb_lastnameValidator);
+            isValid = false;
+        }
+        if (tf_firstname.getText().isEmpty()) {
+            NodeValidation.addInvalidStyle(vb_firstnameValidator);
+            isValid = false;
+        }
+        if (tf_middlename.getText().isEmpty()) {
+            NodeValidation.addInvalidStyle(vb_middlenameValidator);
+            isValid = false;
+        }
+        if (tf_username.getText().isEmpty()) {
+            NodeValidation.addInvalidStyle(hb_usernameValidator);
+            isValid = false;
+        }
+        if (tf_password.getText().isEmpty()) {
+            NodeValidation.addInvalidStyle(hb_passwordValidator);
+            isValid = false;
+        }
+        if (!pf_password.getText().equals(tf_password.getText())) {
+            NodeValidation.addInvalidStyle(hb_passwordValidator);
+            isValid = false;
+        }
+
+        return isValid;
     }
 }

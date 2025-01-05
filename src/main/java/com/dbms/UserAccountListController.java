@@ -13,6 +13,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -86,6 +87,9 @@ public class UserAccountListController implements Initializable {
             TableColumn colName = (TableColumn) tv_userAccountList.getColumns().get(1);
             ObservableList<ObservableList> data = tv_userAccountList.getItems();
             int index = tv_userAccountList.getSelectionModel().getSelectedIndex();
+            // Do nothing if clicked on header
+            if (index == -1)
+                return;
             int userId = Integer.parseInt(data.get(index).get(0).toString());
             selectedUserId = userId;
         } catch (Exception e) {

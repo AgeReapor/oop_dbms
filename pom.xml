@@ -17,14 +17,6 @@
             <version>11.2.1</version>
         </dependency>
 
-
-        <dependency>
-            <groupId>org.controlsfx</groupId>
-            <artifactId>controlsfx</artifactId>
-            <version>11.2.1</version>
-        </dependency>
-
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
