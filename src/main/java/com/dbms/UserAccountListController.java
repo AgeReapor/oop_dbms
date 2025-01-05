@@ -59,6 +59,8 @@ public class UserAccountListController implements Initializable {
         // Populate table from database
         populateTable();
 
+        tv_userAccountList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         // Initialize search options
         ccb_searchOptions.getItems().addAll(searchOptions);
         ccb_searchOptions.getCheckModel().check(0);
@@ -151,10 +153,6 @@ public class UserAccountListController implements Initializable {
         ArrayList<String> options = getSearchOptions();
         String searchString = tf_searchField.getText();
 
-        // If no search options are selected, do nothing
-        if (options.isEmpty())
-            return;
-
         // If search field is empty, populate table with all records
         if (searchString.isEmpty()) {
             try {
@@ -164,6 +162,10 @@ public class UserAccountListController implements Initializable {
             }
             return;
         }
+
+        // If no search options are selected, do nothing
+        if (options.isEmpty())
+            return;
 
         // Else, populate table with search results
         System.out.println("New Value: " + searchString);

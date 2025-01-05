@@ -11,34 +11,49 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<BorderPane fx:id="bp_userAccountDataEntry" prefHeight="752.0" prefWidth="1040.0" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.UserAccountListController">
+<BorderPane fx:id="bp_userAccountDataEntry" prefHeight="752.0" prefWidth="1040.0" style="-fx-background-color: #ccc;" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.UserAccountListController">
    <center>
-      <VBox alignment="CENTER" spacing="24.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User Account Database" />
-            <HBox alignment="CENTER_LEFT">
+            <VBox alignment="CENTER" spacing="24.0" styleClass="table" stylesheets="@css/global.css" VBox.vgrow="ALWAYS">
                <children>
-                  <Label text="Search through: " />
-                  <CheckComboBox fx:id="ccb_searchOptions" />
-                  <TextField fx:id="tf_searchField" />
-               </children>
-            </HBox>
-            <VBox maxWidth="1200.0" prefHeight="200.0" prefWidth="100.0" styleClass="table">
-               <children>
-                  <TableView fx:id="tv_userAccountList" onMouseClicked="#onTableClick" prefHeight="200.0" prefWidth="200.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="User Account Database">
+                     <VBox.margin>
+                        <Insets bottom="24.0" />
+                     </VBox.margin>
+                  </Text>
+                  <HBox alignment="CENTER_LEFT" spacing="12.0" styleClass="search-group">
+                     <children>
+                        <Label text="Search" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="tf_searchField" maxWidth="260.0" minWidth="120.0" prefHeight="38.0" prefWidth="260.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="24.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label text="Search from: " />
+                        <CheckComboBox fx:id="ccb_searchOptions" minWidth="48.0" />
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tv_userAccountList" onMouseClicked="#onTableClick" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="CENTER_RIGHT" styleClass="action-btn-group">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#addHandler" styleClass="btn-save" text="Add" />
+                        <Button mnemonicParsing="false" onAction="#updateHandler" styleClass="btn-save" text="Edit" />
+                        <Button mnemonicParsing="false" onAction="#deleteHandler" styleClass="btn-close" text="Delete" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
-            <HBox alignment="CENTER_RIGHT">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#addHandler" text="Add" />
-                  <Button mnemonicParsing="false" onAction="#updateHandler" text="Edit" />
-                  <Button mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
-               </children>
-            </HBox>
          </children>
          <padding>
-            <Insets left="48.0" right="48.0" />
+            <Insets bottom="32.0" left="12.0" right="12.0" top="32.0" />
          </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </VBox>
    </center>
+   <padding>
+      <Insets left="48.0" right="48.0" />
+   </padding>
 </BorderPane>
