@@ -36,18 +36,14 @@ public class UserLoginController {
     void onSubmitClick() throws IOException {
         String username = tf_username.getText();
         String password = pf_password.getText();
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
 
         int userId = fetchUserId(username, password);
         if (userId == -1) {
-            System.out.println("Invalid username or password.");
             t_invalidWarning.setOpacity(1);
             return;
         }
 
         t_invalidWarning.setOpacity(0);
-        System.out.println("Found user `" + username + "`.");
 
         FXMLLoader loader = App.getFXMLLoader("mainView");
         Parent root = loader.load();

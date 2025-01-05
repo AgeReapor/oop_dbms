@@ -22,7 +22,6 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
 
         loadAllFonts();
-
         String homeScene = "UserLoginView";
 
         scene = new Scene(loadFXML(homeScene), 1280, 800);

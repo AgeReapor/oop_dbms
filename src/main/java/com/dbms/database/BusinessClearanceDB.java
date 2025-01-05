@@ -12,11 +12,11 @@ import com.dbms.models.BusinessClearanceTransaction;
 import com.dbms.models.InspectionType;
 import com.dbms.models.PropertyType;
 import com.dbms.utils.PopulateTable;
-
 import javafx.scene.control.TableView;
 
 public class BusinessClearanceDB {
 
+    // fetch business clearance transaction
     public static BusinessClearanceTransaction fetchBusinessClearanceTransaction(int transactionId)
             throws SQLException {
         BusinessClearanceTransaction transaction = null;
@@ -55,6 +55,7 @@ public class BusinessClearanceDB {
         return transaction;
     }
 
+    // add business clearance transaction
     public static void addBusinessClearanceTransaction(BusinessClearanceTransaction transaction)
             throws SQLException {
         String inspectionType = transaction.getInspectionType().toString();
@@ -91,6 +92,7 @@ public class BusinessClearanceDB {
         conn.close();
     }
 
+    // update business clearance transaction
     public static void updateBusinessClearanceTransaction(BusinessClearanceTransaction transaction)
             throws SQLException {
         int transactionId = transaction.getTransactionId();
@@ -130,6 +132,7 @@ public class BusinessClearanceDB {
         conn.close();
     }
 
+    // delete business clearance transaction
     public static void deleteBusinessClearanceTransaction(int transactionId) throws SQLException {
         // set status to 0
         String query = "UPDATE `" + DBConnection.getDBName()
@@ -143,6 +146,7 @@ public class BusinessClearanceDB {
         conn.close();
     }
 
+    // populate TableView with full list
     public static void populateTable(TableView tableView) throws SQLException {
         String query = "SELECT transaction_id, inspection_type, owner, owner_address, business_name, business_address, business_type, contact_number, property_type, registration_number, inspector, inspection_date, amount, official_receipt_number FROM `"
                 + DBConnection.getDBName()
@@ -156,12 +160,14 @@ public class BusinessClearanceDB {
         conn.close();
     }
 
+    // populate TableView with search results
     public static void populateSearchResults(TableView tableView, String searchString, ArrayList<String> searchOptions)
             throws SQLException {
         ResultSet rs = searchQuery(searchString, searchOptions);
         PopulateTable.populateTable(tableView, rs);
     }
 
+    // customized search query
     private static ResultSet searchQuery(String searchString, ArrayList<String> searchOptions) throws SQLException {
         String query = "SELECT transaction_id, inspection_type, owner, owner_address, business_name, business_address, business_type, contact_number, property_type, registration_number, inspector, inspection_date, amount, official_receipt_number FROM `"
                 + DBConnection.getDBName()

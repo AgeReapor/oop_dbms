@@ -2,7 +2,6 @@ package com.dbms;
 
 import com.dbms.database.BusinessClearanceDB;
 import com.dbms.models.BusinessClearanceTransaction;
-import com.dbms.models.InspectionType;
 import com.dbms.utils.NodeValidation;
 import com.dbms.utils.ThrowAlert;
 
@@ -33,7 +32,6 @@ public class BusinessClearanceEntryController implements Initializable {
     private final MainViewController mainViewController;
 
     public BusinessClearanceEntryController(MainViewController mainViewController) {
-        System.out.println("New User Account.");
         transactionId = -1;
         isUpdate = false;
         this.mainViewController = mainViewController;
@@ -41,11 +39,9 @@ public class BusinessClearanceEntryController implements Initializable {
     }
 
     public BusinessClearanceEntryController(MainViewController mainViewController, int transactionId) {
-        System.out.println("Update User Account.");
         this.transactionId = transactionId;
         isUpdate = true;
         this.mainViewController = mainViewController;
-        System.out.println("TransactionId: " + transactionId);
         transaction = loadBusinessClearanceTransaction(transactionId);
     }
 
@@ -146,7 +142,6 @@ public class BusinessClearanceEntryController implements Initializable {
 
     private BusinessClearanceTransaction loadBusinessClearanceTransaction(int transactionId) {
         if (!isUpdate) {
-            System.out.println("Loaded new Business Clearance Transaction.");
             return new BusinessClearanceTransaction();
         }
         try {
@@ -262,7 +257,6 @@ public class BusinessClearanceEntryController implements Initializable {
             transaction.setOfficialReceiptNumber(tf_ORNo.getText());
             transaction.setInspector(tf_inspector.getText());
             transaction.setAmount(new BigDecimal(tf_amount.getText()));
-            System.out.println(transaction.getAmount());
             transaction.setOfficialReceiptNumber(tf_ORNo.getText());
             transaction.setInspectionDate(dp_date.getValue());
             transaction.setRegistrationNumber(tf_regNo.getText());

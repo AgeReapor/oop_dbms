@@ -13,7 +13,6 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -95,7 +94,6 @@ public class UserAccountListController implements Initializable {
         } catch (Exception e) {
             ThrowAlert.throwAlert("Error", "Failed to load User Account data", e.getMessage(), AlertType.ERROR);
         }
-        System.out.println("Selected User Id: " + selectedUserId);
     }
 
     /**
@@ -172,7 +170,6 @@ public class UserAccountListController implements Initializable {
             return;
 
         // Else, populate table with search results
-        System.out.println("New Value: " + searchString);
         try {
             UserAccountDB.populateSearchResults(tv_userAccountList, searchString, options);
         } catch (SQLException e) {
@@ -214,7 +211,6 @@ public class UserAccountListController implements Initializable {
         ObservableList data = ccb_searchOptions.getCheckModel().getCheckedItems();
         for (Object item : data) {
             options.add(item.toString());
-            System.out.println(item.toString());
         }
         return options;
     }

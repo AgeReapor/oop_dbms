@@ -1,6 +1,5 @@
 package com.dbms;
 
-import com.dbms.database.SetupDB;
 import com.dbms.database.UserAccountDB;
 import com.dbms.models.UserAccount;
 import com.dbms.utils.NodeValidation;
@@ -29,7 +28,6 @@ public class UserAccountDataEntryController implements Initializable {
     private final MainViewController mainViewController;
 
     public UserAccountDataEntryController(MainViewController mainViewController) {
-        System.out.println("New User Account.");
         userId = -1;
         isUpdate = false;
         this.mainViewController = mainViewController;
@@ -37,12 +35,10 @@ public class UserAccountDataEntryController implements Initializable {
     }
 
     public UserAccountDataEntryController(MainViewController mainViewController, int userId) {
-        System.out.println("Update User Account.");
         this.userId = userId;
         isUpdate = true;
         userAccount = loadUserAccount(userId);
         this.mainViewController = mainViewController;
-        System.out.println("UserId: " + userId);
     }
 
     @FXML
@@ -73,8 +69,6 @@ public class UserAccountDataEntryController implements Initializable {
         tf_username.setText(userAccount.getUsername());
         tf_password.setText(userAccount.getPassword());
         pf_password.setText(userAccount.getPassword());
-
-        System.out.println("Populated fields.");
 
         // Bind PasswordFields to their respective TextFields
         tf_password.textProperty().bindBidirectional(pf_password.textProperty());
@@ -110,12 +104,10 @@ public class UserAccountDataEntryController implements Initializable {
 
     private UserAccount loadUserAccount(int userId) {
         if (!isUpdate) {
-            System.out.println("Loaded new User Account.");
             return new UserAccount(userId, "", "", "", "", "");
         }
         try {
             UserAccount ret = UserAccountDB.fetchUserAccount(userId);
-            System.out.println("Loaded User Account.");
             return ret;
         } catch (SQLException e) {
             ThrowAlert.throwAlert("Error", "Database Error", e.getMessage(), Alert.AlertType.ERROR);

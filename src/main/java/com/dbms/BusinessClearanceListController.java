@@ -102,7 +102,6 @@ public class BusinessClearanceListController implements Initializable {
         } catch (Exception e) {
             ThrowAlert.throwAlert("Error", "Failed to load Transaction data", e.getMessage(), AlertType.ERROR);
         }
-        System.out.println("Selected Transaction Id: " + selectedTransactionId);
     }
 
     /**
@@ -180,7 +179,6 @@ public class BusinessClearanceListController implements Initializable {
             return;
 
         // Else, populate table with search results
-        System.out.println("New Value: " + searchString);
         try {
             BusinessClearanceDB.populateSearchResults(tv_transactionList, searchString, options);
         } catch (SQLException e) {
@@ -222,7 +220,6 @@ public class BusinessClearanceListController implements Initializable {
         ObservableList data = ccb_searchOptions.getCheckModel().getCheckedItems();
         for (Object item : data) {
             options.add(item.toString());
-            System.out.println(item.toString());
         }
         return options;
     }
