@@ -23,8 +23,7 @@ public class App extends Application {
 
         loadAllFonts();
 
-        String homeScene = "mainView";
-        // String homeScene = "UserLoginView";
+        String homeScene = "UserLoginView";
 
         scene = new Scene(loadFXML(homeScene), 1280, 800);
 

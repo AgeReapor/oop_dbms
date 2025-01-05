@@ -180,6 +180,7 @@ public class BusinessClearanceEntryController implements Initializable {
         NodeValidation.forceLengthLimit(tf_contactNumber, 20);
         NodeValidation.forceLengthLimit(tf_regNo, 25);
         NodeValidation.forceLengthLimit(tf_inspector, 75);
+        NodeValidation.forceLengthLimit(tf_amount, 12);
         NodeValidation.forceLengthLimit(tf_ORNo, 25);
 
         NodeValidation.forceIntegerInputs(tf_contactNumber);
