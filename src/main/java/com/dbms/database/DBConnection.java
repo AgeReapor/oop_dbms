@@ -4,13 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.dbms.utils.ThrowAlert;
-
-import javafx.scene.control.Alert.AlertType;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
+// Utility class to connect to the database
 public class DBConnection {
     static private final String DB_URL = "jdbc:mysql://localhost:3309/";
     static private final String USER = "root";

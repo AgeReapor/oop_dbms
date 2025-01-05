@@ -11,16 +11,15 @@ import com.dbms.utils.PopulateTable;
 
 import javafx.scene.control.TableView;
 
+//  Handles CRUD operations for user accounts in the database.
 public class UserAccountDB {
-
+    // Retrieves a user account from the database using the given user ID.
     public static UserAccount fetchUserAccount(int userId) throws SQLException {
         UserAccount userAccount = null;
         String query = "SELECT * FROM `" + DBConnection.getDBName() + "`.`user_account` WHERE user_id = "
                 + userId + ";";
-
         Connection conn = DBConnection.getConnection();
         PreparedStatement stmt = conn.prepareStatement(query);
-
         ResultSet rs = stmt.executeQuery();
 
         if (rs.next()) {
@@ -30,6 +29,7 @@ public class UserAccountDB {
             String lastname = rs.getString("lastname");
             String firstname = rs.getString("firstname");
             String middlename = rs.getString("middlename");
+
             userAccount = new UserAccount(USER_ID, username, password, lastname, firstname, middlename);
         }
         conn.close();
@@ -37,6 +37,7 @@ public class UserAccountDB {
         return userAccount;
     }
 
+    // Adds a new user account to the database.
     public static void addUserAccount(UserAccount userAccount) throws SQLException {
         String username = userAccount.getUsername();
         String password = userAccount.getPassword();
@@ -55,6 +56,7 @@ public class UserAccountDB {
         conn.close();
     }
 
+    // Updates an existing user account in the database.
     public static void updateUserAccount(UserAccount userAccount) throws SQLException {
         int userId = userAccount.getUserId();
         String username = userAccount.getUsername();
@@ -74,6 +76,7 @@ public class UserAccountDB {
         conn.close();
     }
 
+    // Deletes a user account from the database.
     public static void deleteUserAccount(int userId) throws SQLException {
         // update status to 0 (deleted)
         String query = "UPDATE `" + DBConnection.getDBName()
@@ -86,6 +89,7 @@ public class UserAccountDB {
         conn.close();
     }
 
+    // Populates a TableView with user accounts from the database.
     public static void populateTable(TableView tableView) throws SQLException {
         String query = "SELECT user_id, username, password, firstname, middlename, lastname FROM `"
                 + DBConnection.getDBName() + "`.`user_account` WHERE status = 1;";
@@ -98,12 +102,14 @@ public class UserAccountDB {
         conn.close();
     }
 
+    // Populates a TableView with search results from the database.
     public static void populateSearchResults(TableView tableView, String searchString, ArrayList<String> searchOptions)
             throws SQLException {
         ResultSet rs = searchQuery(searchString, searchOptions);
         PopulateTable.populateTable(tableView, rs);
     }
 
+    // Executes a search query on the user accounts in the database.
     private static ResultSet searchQuery(String searchString, ArrayList<String> searchOptions) throws SQLException {
         String query = "SELECT user_id, username, password, firstname, middlename, lastname FROM `"
                 + DBConnection.getDBName() + "`.`user_account` WHERE status = 1 AND (";

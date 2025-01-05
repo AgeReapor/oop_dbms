@@ -1,15 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="bp_businessClearanceEntry" prefHeight="752.0" prefWidth="1040.0" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="bp_businessClearanceEntry" prefHeight="752.0" prefWidth="1040.0" stylesheets="@css/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dbms.BusinessClearanceEntryController">
    <center>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Business Clearance Entry" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="72.0" />
-         </font>
-      </Text>
+      <ScrollPane fx:id="sp_scrollpane" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="vb_scrollContent" alignment="CENTER" prefHeight="753.0" prefWidth="1026.0" style="-fx-background-color: #ccc;">
+               <children>
+                  <VBox maxWidth="1200.0" prefHeight="200.0" prefWidth="942.0" spacing="12.0" styleClass="form" VBox.vgrow="ALWAYS">
+                     <children>
+                        <StackPane alignment="CENTER_LEFT">
+                           <children>
+                              <Text fx:id="t_headerAdd" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Submit a Business Clearance Form" />
+                              <Text fx:id="t_headerUpdate" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Update a Business Clearance Form" />
+                           </children>
+                        </StackPane>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Business Information">
+                           <VBox.margin>
+                              <Insets bottom="12.0" top="32.0" />
+                           </VBox.margin>
+                        </Text>
+                        <HBox fx:id="hb_usernameValidator1" alignment="CENTER_LEFT" prefHeight="42.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Owner's Name" />
+                              <TextField fx:id="tf_owner" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="hb_usernameValidator11" alignment="CENTER_LEFT" prefHeight="42.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Owner's Address" />
+                              <TextField fx:id="me11" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="hb_usernameValidator111" alignment="CENTER_LEFT" prefHeight="42.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Business Name" />
+                              <TextField HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="hb_usernameValidator112" alignment="CENTER_LEFT" prefHeight="42.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Business Address" />
+                              <TextField HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="hb_usernameValidator113" alignment="CENTER_LEFT" prefHeight="42.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Business Type" />
+                              <TextField HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="hb_usernameValidator1131" alignment="CENTER_LEFT" prefHeight="42.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Contact Number" />
+                              <TextField HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="hb_usernameValidator1141" alignment="CENTER_LEFT" prefHeight="42.0" spacing="24.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Property Type" />
+                              <RadioButton mnemonicParsing="false" text="Owned">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="propertyTypeGroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="Rented" toggleGroup="$propertyTypeGroup" />
+                              <RadioButton mnemonicParsing="false" text="Lessor" toggleGroup="$propertyTypeGroup" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="hb_usernameValidator114" alignment="CENTER_LEFT" prefHeight="42.0">
+                           <children>
+                              <Label prefWidth="180.0" text="DTI/SEC Reg No." />
+                              <TextField HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Inspection Details">
+                           <VBox.margin>
+                              <Insets bottom="12.0" top="32.0" />
+                           </VBox.margin>
+                        </Text>
+                        <HBox fx:id="hb_usernameValidator11411" alignment="CENTER_LEFT" prefHeight="42.0" spacing="24.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Inspection Type" />
+                              <RadioButton mnemonicParsing="false" text="New">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="inspectionTypeGroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton mnemonicParsing="false" text="Renewal" toggleGroup="$inspectionTypeGroup" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="hb_usernameValidator1143" alignment="CENTER_LEFT" prefHeight="42.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Inspector" />
+                              <TextField HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="hb_usernameValidator1142" alignment="CENTER_LEFT" prefHeight="42.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Date" />
+                              <DatePicker />
+                           </children>
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="For Barangay Officer">
+                           <VBox.margin>
+                              <Insets top="32.0" />
+                           </VBox.margin>
+                        </Text>
+                        <HBox fx:id="hb_usernameValidator1144" alignment="CENTER_LEFT" prefHeight="42.0" spacing="12.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Amount" />
+                              <Label text="Php" HBox.hgrow="NEVER" />
+                              <TextField HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="hb_usernameValidator1145" alignment="CENTER_LEFT" prefHeight="42.0">
+                           <children>
+                              <Label prefWidth="180.0" text="OR. Number:" />
+                              <TextField HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="action-btn-group">
+                           <children>
+                              <StackPane alignment="CENTER_RIGHT">
+                                 <children>
+                                    <Button fx:id="btn_add" mnemonicParsing="false" styleClass="btn-save" text="Add" />
+                                    <Button fx:id="btn_update" mnemonicParsing="false" styleClass="btn-save" text="Update" />
+                                 </children>
+                              </StackPane>
+                              <Button fx:id="btn_clear" mnemonicParsing="false" text="Clear" />
+                              <Button fx:id="btn_close" mnemonicParsing="false" styleClass="btn-close" text="Close" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="64.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox fx:id="hb_usernameValidator1111" alignment="CENTER_LEFT" prefHeight="42.0">
+                           <children>
+                              <Label prefWidth="180.0" text="Business Name" />
+                              <TextField HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="32.0" left="48.0" right="48.0" top="32.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
    </center>
 </BorderPane>

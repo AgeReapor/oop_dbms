@@ -31,7 +31,7 @@ public class SetupDB {
 
     // Initializes the `user_account` table
     private static void createUserAccountTable() throws SQLException {
-        String query = "CREATE TABLE IF NOT EXISTS `oop_dbms`.`user_account` (\n" +
+        String query = "CREATE TABLE IF NOT EXISTS `" + DBConnection.getDBName() + "`.`user_account` (\n" +
                 "  `user_id` INT NOT NULL AUTO_INCREMENT,\n" +
                 "  `username` VARCHAR(20) NOT NULL,\n" +
                 "  `password` VARCHAR(20) NOT NULL,\n" +
@@ -50,11 +50,13 @@ public class SetupDB {
 
     // Initializes the `business_clearance_transaction` table
     private static void createBusinessClearanceTransactionTable() throws SQLException {
-        String query = "CREATE TABLE IF NOT EXISTS `oop_dbms`.`business_clearance_transaction` (\n" +
+        String query = "CREATE TABLE IF NOT EXISTS `" + DBConnection.getDBName()
+                + "`.`business_clearance_transaction` (\n" +
                 "  `transaction_id` INT NOT NULL AUTO_INCREMENT,\n" +
                 "  `inspection_type` ENUM('new', 'renewal') NOT NULL,\n" +
-                "  `owner` VARCHAR(75) NOT NULL,\n" +
-                "  `owner_address` VARCHAR(255) NOT NULL,\n" +
+                "  `business_name` VARCHAR(255) NOT NULL,\n" +
+                "  `owner_address` VARCHAR(75) NOT NULL,\n" +
+                "  `business_address` VARCHAR(255) NOT NULL,\n" +
                 "  `business_name` VARCHAR(255) NOT NULL,\n" +
                 "  `business_type` VARCHAR(25) NOT NULL,\n" +
                 "  `contact_number` VARCHAR(20) NOT NULL,\n" +

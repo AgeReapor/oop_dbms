@@ -9,6 +9,7 @@ public class BusinessClearanceTransaction {
     private String owner;
     private String ownerAddress;
     private String businessName;
+    private String businessAddress;
     private String businessType;
     private String contactNumber;
     private PropertyType propertyType;
@@ -21,7 +22,7 @@ public class BusinessClearanceTransaction {
 
     // Constructor
     public BusinessClearanceTransaction(int transactionId, InspectionType inspectionType, String owner,
-            String ownerAddress, String businessName, String businessType, String contactNumber,
+            String ownerAddress, String businessName, String businessAddress, String businessType, String contactNumber,
             PropertyType propertyType,
             String registrationNumber, String inspector, LocalDate inspectionDate, BigDecimal amount,
             String officialReceiptNumber) {
@@ -30,6 +31,7 @@ public class BusinessClearanceTransaction {
         this.owner = owner;
         this.ownerAddress = ownerAddress;
         this.businessName = businessName;
+        this.businessAddress = businessAddress;
         this.businessType = businessType;
         this.contactNumber = contactNumber;
         this.propertyType = propertyType;
@@ -38,6 +40,24 @@ public class BusinessClearanceTransaction {
         this.inspectionDate = inspectionDate;
         this.amount = amount;
         this.officialReceiptNumber = officialReceiptNumber;
+        this.status = 1;
+    }
+
+    public BusinessClearanceTransaction() {
+        this.TRANSACTION_ID = -1;
+        this.inspectionType = null;
+        this.owner = "";
+        this.ownerAddress = "";
+        this.businessName = "";
+        this.businessAddress = "";
+        this.businessType = "";
+        this.contactNumber = "";
+        this.propertyType = null;
+        this.registrationNumber = "";
+        this.inspector = "";
+        this.inspectionDate = null;
+        this.amount = new BigDecimal(0);
+        this.officialReceiptNumber = "";
         this.status = 1;
     }
 
@@ -76,6 +96,14 @@ public class BusinessClearanceTransaction {
 
     public void setBusinessName(String businessName) {
         this.businessName = businessName;
+    }
+
+    public String getBusinessAddress() {
+        return businessAddress;
+    }
+
+    public void setBusinessAddress(String businessAddress) {
+        this.businessAddress = businessAddress;
     }
 
     public String getBusinessType() {
