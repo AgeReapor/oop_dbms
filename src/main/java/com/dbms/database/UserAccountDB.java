@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.dbms.models.UserAccount;
 import com.dbms.utils.PopulateTable;
@@ -86,7 +87,7 @@ public class UserAccountDB {
     }
 
     public static void populateTable(TableView tableView) throws SQLException {
-        String query = "SELECT user_id, username, password, lastname, firstname, middlename FROM `"
+        String query = "SELECT user_id, username, password, firstname, middlename, lastname FROM `"
                 + DBConnection.getDBName() + "`.`user_account` WHERE status = 1;";
 
         Connection conn = DBConnection.getConnection();
@@ -95,5 +96,32 @@ public class UserAccountDB {
 
         PopulateTable.populateTable(tableView, rs);
         conn.close();
+    }
+
+    public static void populateSearchResults(TableView tableView, String searchString, ArrayList<String> searchOptions)
+            throws SQLException {
+        ResultSet rs = searchQuery(searchString, searchOptions);
+        PopulateTable.populateTable(tableView, rs);
+    }
+
+    private static ResultSet searchQuery(String searchString, ArrayList<String> searchOptions) throws SQLException {
+        String query = "SELECT user_id, username, password, firstname, middlename, lastname FROM `"
+                + DBConnection.getDBName() + "`.`user_account` WHERE status = 1 AND (";
+        for (int i = 0; i < searchOptions.size(); i++) {
+            query += searchOptions.get(i) + " LIKE ? ";
+            if (i < searchOptions.size() - 1) {
+                query += "OR ";
+            }
+        }
+        query += ");";
+
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        for (int i = 0; i < searchOptions.size(); i++) {
+            stmt.setString(i + 1, "%" + searchString + "%");
+        }
+        ResultSet rs = stmt.executeQuery();
+
+        return rs;
     }
 }
