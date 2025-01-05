@@ -62,6 +62,7 @@ public class NodeValidation {
 
     }
 
+    // Add invalid style as flag
     public static void addInvalidStyle(Node node) {
         // check if already invalid
         if (!node.getStyleClass().contains("invalid")) {
@@ -69,9 +70,37 @@ public class NodeValidation {
         }
     }
 
+    // Removes invalid style
     public static void removeInvalidStyle(Node node) {
         while (node.getStyleClass().contains("invalid"))
             node.getStyleClass().remove("invalid");
+    }
+
+    // Force integer inputs to TextField
+    public static void forceIntegerInputs(TextField node) {
+        node.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                node.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+    }
+
+    // Force integers and decimal inputs to TextField
+    public static void forceDecimalInputs(TextField node) {
+        node.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*\\.?\\d*")) {
+                node.setText(newValue.replaceAll("[^\\d.]", ""));
+            }
+        });
+    }
+
+    // Force length limit to TextField
+    public static void forceLengthLimit(TextField node, int limit) {
+        node.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > limit) {
+                node.setText(newValue.substring(0, limit));
+            }
+        });
     }
 
 }

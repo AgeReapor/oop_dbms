@@ -63,6 +63,7 @@ public class UserLoginController {
     void onClearClick() throws IOException {
         tf_username.clear();
         pf_password.clear();
+        t_invalidWarning.setOpacity(0);
     }
 
     // Returns user_id, or -1 if not found

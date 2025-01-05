@@ -1,7 +1,22 @@
-.input-fields {
+.display-text {
+	-fx-font-family: "Manrope";
+	-fx-font-weight: bold;
+	-fx-font-size: 32px;
+	-fx-fill: #fff;
+}
+
+TextField,
+PasswordField {
 	-fx-background-color: #f2f2f2;
 	-fx-font-family: "Abel";
 	-fx-font-weight: 300;
+	-fx-font-size: 18px;
+}
+
+Label {
+	-fx-font-family: "Abel";
+	-fx-font-weight: 300;
+	-fx-fill: #f2f2f2;
 	-fx-font-size: 18px;
 }
 

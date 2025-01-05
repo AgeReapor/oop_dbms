@@ -64,7 +64,7 @@ public class SetupDB {
                 "  `registration_number` VARCHAR(25) NOT NULL,\n" +
                 "  `inspector` VARCHAR(75) NOT NULL,\n" +
                 "  `inspection_date` DATE NOT NULL,\n" +
-                "  `amount` DECIMAL NOT NULL,\n" +
+                "  `amount` DECIMAL(10,2) NOT NULL,\n" +
                 "  `official_receipt_number` VARCHAR(25) NOT NULL,\n" +
                 "  `status` INT NOT NULL DEFAULT 1,\n" +
                 "  PRIMARY KEY (`transaction_id`)\n" +

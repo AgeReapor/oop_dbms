@@ -53,37 +53,30 @@
             <HBox prefHeight="111.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
          </bottom>
          <right>
-            <VBox alignment="CENTER_LEFT" prefHeight="576.0" prefWidth="380.0" styleClass="login-title" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER_LEFT" prefHeight="576.0" prefWidth="0.0" styleClass="login-title" BorderPane.alignment="CENTER">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#feed3f" height="2.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" width="16.0">
                      <VBox.margin>
                         <Insets bottom="16.0" />
                      </VBox.margin>
                   </Rectangle>
-                  <Label styleClass="login-title" text="Barangay Clearance Database Management" textFill="WHITE" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="32.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="18.0" />
-                     </VBox.margin>
-                  </Label>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="display-text" text="Barangay Clearance Database Management" wrappingWidth="361.28125" />
                   <VBox prefHeight="200.0" prefWidth="569.0">
                      <children>
-                        <Label styleClass="font-manrope" text="Username" textFill="WHITE">
+                        <Label text="Username" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
                            <VBox.margin>
-                              <Insets bottom="12.0" top="16.0" />
+                              <Insets bottom="12.0" top="32.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="tf_username" prefHeight="39.0" prefWidth="339.0" promptText="Enter your name here." styleClass="input-fields">
+                        <TextField fx:id="tf_username" prefHeight="39.0" prefWidth="339.0" promptText="Enter your name here.">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <Label styleClass="font-manrope" stylesheets="@css/global.css" text="Password" textFill="WHITE">
+                        <Label text="Password" textFill="WHITE">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -91,7 +84,7 @@
                               <Insets bottom="12.0" top="16.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField fx:id="pf_password" promptText="Enter your password here." styleClass="input-fields" />
+                        <PasswordField fx:id="pf_password" promptText="Enter your password here." />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>

@@ -171,6 +171,21 @@ public class BusinessClearanceEntryController implements Initializable {
         NodeValidation.addDatePickerValidation(dp_date, hb_dateValidator);
         NodeValidation.addToggleGroupValidation(inspectionTypeGroup, hb_inspectionTypeValidator);
         NodeValidation.addToggleGroupValidation(propertyTypeGroup, hb_propertyTypeValidator);
+
+        NodeValidation.forceLengthLimit(tf_owner, 75);
+        NodeValidation.forceLengthLimit(tf_ownerAddress, 255);
+        NodeValidation.forceLengthLimit(tf_businessName, 255);
+        NodeValidation.forceLengthLimit(tf_businessAddress, 255);
+        NodeValidation.forceLengthLimit(tf_businessType, 25);
+        NodeValidation.forceLengthLimit(tf_contactNumber, 20);
+        NodeValidation.forceLengthLimit(tf_regNo, 25);
+        NodeValidation.forceLengthLimit(tf_inspector, 75);
+        NodeValidation.forceLengthLimit(tf_ORNo, 25);
+
+        NodeValidation.forceIntegerInputs(tf_contactNumber);
+        NodeValidation.forceIntegerInputs(tf_regNo);
+        NodeValidation.forceIntegerInputs(tf_ORNo);
+        NodeValidation.forceDecimalInputs(tf_amount);
     }
 
     @FXML
@@ -246,6 +261,7 @@ public class BusinessClearanceEntryController implements Initializable {
             transaction.setOfficialReceiptNumber(tf_ORNo.getText());
             transaction.setInspector(tf_inspector.getText());
             transaction.setAmount(new BigDecimal(tf_amount.getText()));
+            System.out.println(transaction.getAmount());
             transaction.setOfficialReceiptNumber(tf_ORNo.getText());
             transaction.setInspectionDate(dp_date.getValue());
             transaction.setRegistrationNumber(tf_regNo.getText());

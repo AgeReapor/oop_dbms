@@ -62,7 +62,12 @@ public class BusinessClearanceListController implements Initializable {
         // Populate table from database
         populateTable();
 
-        tv_transactionList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        // adjust column widths
+        tv_transactionList.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+        for (Object col : tv_transactionList.getColumns()) {
+            TableColumn column = (TableColumn) col;
+            column.setPrefWidth(140);
+        }
 
         // Initialize search options
         ccb_searchOptions.getItems().addAll(searchOptions);

@@ -89,6 +89,13 @@ public class UserAccountDataEntryController implements Initializable {
         NodeValidation.addRequiredValidation(tf_username, hb_usernameValidator);
         NodeValidation.addPasswordValidation(pf_password, hb_passwordValidator);
 
+        NodeValidation.forceLengthLimit(tf_username, 20);
+        NodeValidation.forceLengthLimit(tf_password, 20);
+        NodeValidation.forceLengthLimit((TextField) pf_password, 20);
+        NodeValidation.forceLengthLimit(tf_lastname, 25);
+        NodeValidation.forceLengthLimit(tf_firstname, 25);
+        NodeValidation.forceLengthLimit(tf_middlename, 25);
+
         // hide add if updating
         if (isUpdate) {
             btn_add.setVisible(false);
