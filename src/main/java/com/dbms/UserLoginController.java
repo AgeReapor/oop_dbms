@@ -1,13 +1,17 @@
 package com.dbms;
 
 import com.dbms.database.LoginDB;
+import com.dbms.database.SetupDB;
 import com.dbms.utils.ThrowAlert;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -15,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 
-public class UserLoginController {
+public class UserLoginController implements Initializable {
 
     @FXML
     TextField tf_username;
@@ -31,6 +35,17 @@ public class UserLoginController {
 
     @FXML
     Button btn_clear;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        t_invalidWarning.setOpacity(0);
+        try {
+            SetupDB.run();
+        } catch (SQLException e) {
+            ThrowAlert.throwAlert("Error", "Could Not Load Database. You may not be able to login.", e.getMessage(),
+                    AlertType.ERROR);
+        }
+    }
 
     @FXML
     void onSubmitClick() throws IOException {

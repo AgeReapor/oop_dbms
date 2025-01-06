@@ -11,11 +11,6 @@ public enum InspectionType {
         this.inspectionType = inspectionType;
     }
 
-    // Getters
-    public String getInspectionType() {
-        return inspectionType;
-    }
-
     // Methods
     public static InspectionType fromString(String inspectionType) {
         for (InspectionType type : InspectionType.values()) {

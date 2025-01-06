@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
@@ -30,16 +31,11 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        try {
-            SetupDB.run();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         try {
             openUserAccountListView();
         } catch (IOException e) {
-            e.printStackTrace();
+            ThrowAlert.throwAlert("Error", "Failed to open User Account List View", e.getMessage(), AlertType.ERROR);
         }
     }
 

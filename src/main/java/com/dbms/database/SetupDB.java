@@ -21,7 +21,7 @@ public class SetupDB {
     // Initializes the database
     private static void initDB() throws SQLException {
         String dbName = DBConnection.getDBName();
-        String query = "CREATE DATABASE IF NOT EXISTS " + dbName + ";";
+        String query = "CREATE DATABASE IF NOT EXISTS " + dbName + " ;";
         Connection conn = DBConnection.getConnection();
         PreparedStatement stmt = conn.prepareStatement(query);
 
@@ -76,4 +76,7 @@ public class SetupDB {
         conn.close();
     }
 
+    // Workaround Query for Fresh Boot: INSERT INTO `user_account` (`username`,
+    // `password`, `firstname`, `middlename`, `lastname`) VALUES ('admin', 'admin',
+    // 'ad', 'm', 'in');
 }

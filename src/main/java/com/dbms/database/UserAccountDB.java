@@ -13,9 +13,12 @@ import javafx.scene.control.TableView;
 
 //  Handles CRUD operations for user accounts in the database.
 public class UserAccountDB {
+
     // Retrieves a user account from the database using the given user ID.
     public static UserAccount fetchUserAccount(int userId) throws SQLException {
+
         UserAccount userAccount = null;
+
         String query = "SELECT * FROM `" + DBConnection.getDBName() + "`.`user_account` WHERE user_id = "
                 + userId + ";";
         Connection conn = DBConnection.getConnection();
@@ -39,18 +42,17 @@ public class UserAccountDB {
 
     // Adds a new user account to the database.
     public static void addUserAccount(UserAccount userAccount) throws SQLException {
-        String username = userAccount.getUsername();
-        String password = userAccount.getPassword();
-        String lastname = userAccount.getLastname();
-        String firstname = userAccount.getFirstname();
-        String middlename = userAccount.getMiddlename();
-
         String query = "INSERT INTO `" + DBConnection.getDBName()
-                + "`.`user_account` (`username`, `password`, `lastname`, `firstname`, `middlename`) VALUES ('"
-                + username + "', '" + password + "', '" + lastname + "', '" + firstname + "', '" + middlename + "');";
+                + "`.`user_account` (`username`, `password`, `lastname`, `firstname`, `middlename`) VALUES (?, ?, ?, ?, ?)";
 
         Connection conn = DBConnection.getConnection();
         PreparedStatement stmt = conn.prepareStatement(query);
+
+        stmt.setString(1, userAccount.getUsername());
+        stmt.setString(2, userAccount.getPassword());
+        stmt.setString(3, userAccount.getLastname());
+        stmt.setString(4, userAccount.getFirstname());
+        stmt.setString(5, userAccount.getMiddlename());
 
         stmt.execute();
         conn.close();
@@ -58,19 +60,18 @@ public class UserAccountDB {
 
     // Updates an existing user account in the database.
     public static void updateUserAccount(UserAccount userAccount) throws SQLException {
-        int userId = userAccount.getUserId();
-        String username = userAccount.getUsername();
-        String password = userAccount.getPassword();
-        String lastname = userAccount.getLastname();
-        String firstname = userAccount.getFirstname();
-        String middlename = userAccount.getMiddlename();
-
-        String query = "UPDATE `" + DBConnection.getDBName() + "`.`user_account` SET `username` = '" + username
-                + "', `password` = '" + password + "', `lastname` = '" + lastname + "', `firstname` = '" + firstname
-                + "', `middlename` = '" + middlename + "' WHERE `user_account`.`user_id` = " + userId + ";";
+        String query = "UPDATE `" + DBConnection.getDBName()
+                + "`.`user_account` SET `username` = ?, `password` = ?, `lastname` = ?, `firstname` = ?, `middlename` = ? WHERE `user_account`.`user_id` = ?";
 
         Connection conn = DBConnection.getConnection();
         PreparedStatement stmt = conn.prepareStatement(query);
+
+        stmt.setString(1, userAccount.getUsername());
+        stmt.setString(2, userAccount.getPassword());
+        stmt.setString(3, userAccount.getLastname());
+        stmt.setString(4, userAccount.getFirstname());
+        stmt.setString(5, userAccount.getMiddlename());
+        stmt.setInt(6, userAccount.getUserId());
 
         stmt.execute();
         conn.close();

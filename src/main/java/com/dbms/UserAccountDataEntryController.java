@@ -180,7 +180,8 @@ public class UserAccountDataEntryController implements Initializable {
             UserAccountDB.updateUserAccount(userAccount);
             ThrowAlert.throwAlert("Success", "User Account Updated", "User Account updated successfully.",
                     Alert.AlertType.INFORMATION);
-        } catch (SQLException e) {
+            mainViewController.openUserAccountListView();
+        } catch (Exception e) {
             ThrowAlert.throwAlert("Error", "Failed to update User Account", e.getMessage(), Alert.AlertType.ERROR);
         }
     }

@@ -58,35 +58,28 @@ public class BusinessClearanceDB {
     // add business clearance transaction
     public static void addBusinessClearanceTransaction(BusinessClearanceTransaction transaction)
             throws SQLException {
-        String inspectionType = transaction.getInspectionType().toString();
-        String owner = transaction.getOwner();
-        String ownerAddress = transaction.getOwnerAddress();
-        String businessName = transaction.getBusinessName();
-        String businessAddress = transaction.getBusinessAddress();
-        String businessType = transaction.getBusinessType();
-        String contactNumber = transaction.getContactNumber();
-        String propertyType = transaction.getPropertyType().toString();
-        String registrationNumber = transaction.getRegistrationNumber();
-        String inspector = transaction.getInspector();
-        String inspectionDate = transaction.getInspectionDate().toString();
-        String amount = transaction.getAmount().toString();
-        String officialReceiptNumber = transaction.getOfficialReceiptNumber();
-
         String query = "INSERT INTO `" + DBConnection.getDBName()
                 + "`.`business_clearance_transaction` ("
                 + "`inspection_type`, `owner`, `owner_address`, `business_address`, `business_name`, `business_type`, `contact_number`, "
                 + "`property_type`, `registration_number`, `inspector`, `inspection_date`, `amount`, `official_receipt_number`"
-                + ") VALUES ("
-                + "'" + inspectionType + "', '" + owner + "', '" + ownerAddress + "', '"
-                + businessAddress + "', '"
-                + businessName + "', '" + businessType + "', '" + contactNumber + "', '" + propertyType
-                + "', '"
-                + registrationNumber + "', '" + inspector + "', '" + inspectionDate + "', '" + amount
-                + "', '"
-                + officialReceiptNumber + "');";
+                + ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         Connection conn = DBConnection.getConnection();
         PreparedStatement stmt = conn.prepareStatement(query);
+
+        stmt.setString(1, transaction.getInspectionType().toString());
+        stmt.setString(2, transaction.getOwner());
+        stmt.setString(3, transaction.getOwnerAddress());
+        stmt.setString(4, transaction.getBusinessAddress());
+        stmt.setString(5, transaction.getBusinessName());
+        stmt.setString(6, transaction.getBusinessType());
+        stmt.setString(7, transaction.getContactNumber());
+        stmt.setString(8, transaction.getPropertyType().toString());
+        stmt.setString(9, transaction.getRegistrationNumber());
+        stmt.setString(10, transaction.getInspector());
+        stmt.setString(11, transaction.getInspectionDate().toString());
+        stmt.setBigDecimal(12, transaction.getAmount());
+        stmt.setString(13, transaction.getOfficialReceiptNumber());
 
         stmt.execute();
         conn.close();
@@ -95,38 +88,30 @@ public class BusinessClearanceDB {
     // update business clearance transaction
     public static void updateBusinessClearanceTransaction(BusinessClearanceTransaction transaction)
             throws SQLException {
-        int transactionId = transaction.getTransactionId();
-        String inspectionType = transaction.getInspectionType().toString();
-        String owner = transaction.getOwner();
-        String ownerAddress = transaction.getOwnerAddress();
-        String businessName = transaction.getBusinessName();
-        String businessAddress = transaction.getBusinessAddress();
-        String businessType = transaction.getBusinessType();
-        String contactNumber = transaction.getContactNumber();
-        String propertyType = transaction.getPropertyType().toString();
-        String registrationNumber = transaction.getRegistrationNumber();
-        String inspector = transaction.getInspector();
-        String inspectionDate = transaction.getInspectionDate().toString();
-        String amount = transaction.getAmount().toString();
-        String officialReceiptNumber = transaction.getOfficialReceiptNumber();
-
         String query = "UPDATE `" + DBConnection.getDBName()
                 + "`.`business_clearance_transaction` SET "
-                + "`inspection_type` = '" + inspectionType + "', `owner` = '" + owner
-                + "', `owner_address` = '"
-                + ownerAddress + "', `business_address` = '" + businessAddress
-                + "', `business_name` = '" + businessName
-                + "', `business_type` = '" + businessType + "', `contact_number` = '" + contactNumber
-                + "', `property_type` = '" + propertyType + "', `registration_number` = '"
-                + registrationNumber
-                + "', `inspector` = '" + inspector + "', `inspection_date` = '" + inspectionDate
-                + "', `amount` = '"
-                + amount + "', `official_receipt_number` = '" + officialReceiptNumber
-                + "' WHERE `transaction_id` = "
-                + transactionId + ";";
+                + "`inspection_type` = ?, `owner` = ?, `owner_address` = ?, `business_address` = ?, "
+                + "`business_name` = ?, `business_type` = ?, `contact_number` = ?, `property_type` = ?, "
+                + "`registration_number` = ?, `inspector` = ?, `inspection_date` = ?, `amount` = ?, "
+                + "`official_receipt_number` = ? WHERE `transaction_id` = ?;";
 
         Connection conn = DBConnection.getConnection();
         PreparedStatement stmt = conn.prepareStatement(query);
+
+        stmt.setString(1, transaction.getInspectionType().toString());
+        stmt.setString(2, transaction.getOwner());
+        stmt.setString(3, transaction.getOwnerAddress());
+        stmt.setString(4, transaction.getBusinessAddress());
+        stmt.setString(5, transaction.getBusinessName());
+        stmt.setString(6, transaction.getBusinessType());
+        stmt.setString(7, transaction.getContactNumber());
+        stmt.setString(8, transaction.getPropertyType().toString());
+        stmt.setString(9, transaction.getRegistrationNumber());
+        stmt.setString(10, transaction.getInspector());
+        stmt.setString(11, transaction.getInspectionDate().toString());
+        stmt.setBigDecimal(12, transaction.getAmount());
+        stmt.setString(13, transaction.getOfficialReceiptNumber());
+        stmt.setInt(14, transaction.getTransactionId());
 
         stmt.execute();
         conn.close();

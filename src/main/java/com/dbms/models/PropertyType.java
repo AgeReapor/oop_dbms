@@ -12,11 +12,6 @@ public enum PropertyType {
         this.propertyType = propertyType;
     }
 
-    // Getters
-    public String getPropertyType() {
-        return propertyType;
-    }
-
     // Methods
     public static PropertyType fromString(String propertyType) {
         for (PropertyType type : PropertyType.values()) {

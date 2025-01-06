@@ -12,8 +12,9 @@ public class LoginDB {
         int ret = -1;
 
         String query = "SELECT user_id FROM `" + DBConnection.getDBName() + "`.`user_account` WHERE username = '"
-                + username + "' AND password = '"
-                + password + "'";
+                + username
+                + "' AND password = '" + password
+                + "' AND status = 1";
 
         Connection conn = DBConnection.getConnection();
         PreparedStatement stmt = conn.prepareStatement(query);
